@@ -1,0 +1,5 @@
+import { env } from 'cloudflare:workers';
+import { getChatGPTUser } from '@/app/chatgpt-auth';
+export async function administrator(){const user=await getChatGPTUser();if(!user)throw new Error('UNAUTHENTICATED');const allowed=(env.ADMIN_EMAILS??'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);if(!(import.meta.env.DEV&&user.userId==='local_seedy')&&!allowed.includes(user.email.toLowerCase()))throw new Error('FORBIDDEN');return user;}
+export function sameOrigin(req:Request){const origin=req.headers.get('origin');if(!origin||origin!==new URL(req.url).origin)throw new Error('FORBIDDEN');}
+export function errorResponse(error:unknown){const message=error instanceof Error?error.message:'ERROR';const code=message==='UNAUTHENTICATED'?401:message==='FORBIDDEN'?403:message==='NOT_FOUND'?404:/DATABASE|STORAGE|NOT_CONFIGURED|SITE_URL/.test(message)?503:400;console.error('DirectAid API:',message.slice(0,180));return Response.json({error:message.startsWith('[')?'INVALID_FORM':message},{status:code,headers:{'Cache-Control':'no-store'}});}
