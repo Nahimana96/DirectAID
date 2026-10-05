@@ -13,3 +13,49 @@
 @media(max-width:1050px){.site-header{padding:16px 4%;gap:15px}.site-header nav{gap:14px}.site-header .brand span{font-size:1.5rem}.site-header .brand img{width:48px;height:48px}.donation-layout{gap:30px;grid-template-columns:.9fr 1.1fr}.how-section{display:block}.steps-grid{margin-top:40px}.account-email{display:none}.carousel-editor{grid-template-columns:1fr 1fr}.stat-grid{gap:12px}.stat-grid>div{padding:18px}.admin-title h1{font-size:2.3rem}}
 @media(max-width:750px){.site-header nav{display:none}.mobile-menu{display:flex;padding:8px;width:36px;height:40px}.site-header .button{padding:8px 12px;font-size:.8rem}.header-tools{gap:6px}.language-select{min-width:54px;width:54px;padding:6px;font-size:.8rem}.site-header .brand{gap:8px}.site-header .brand span{font-size:1.3rem}.site-header .brand img{width:39px;height:39px}.site-header .brand small{font-size:.6rem}.site-header{min-height:80px}.donation-layout{grid-template-columns:1fr;gap:28px}.action-explainer h2{font-size:2rem}.projects-grid{grid-template-columns:1fr}.two-fields{grid-template-columns:1fr}.form-body{padding:22px}.steps-grid{grid-template-columns:1fr;gap:30px}.step-number{margin-bottom:8px}.steps-grid h3{margin-bottom:10px}.contact-options>div,.contact-options>a{padding:22px}.contact-options span{word-break:break-word}.association-logo{width:140px}.admin-title{align-items:start}.admin-title h1{font-size:2rem}.admin-title .eyebrow{font-size:.65rem}.admin-main{padding:32px 4%}.admin-header{padding:14px 4%}.admin-header .brand img{width:40px;height:40px}.admin-header .brand span{font-size:1.4rem}.admin-header>div{gap:0}.admin-header button,.admin-header [data-slot=button]{padding:8px;font-size:.8rem}.stat-grid{grid-template-columns:1fr 1fr}.stat-grid span{font-size:.8rem}.stat-grid strong{font-size:2.1rem}.admin-tabs{gap:3px}.admin-tabs [data-slot=tabs-trigger]{padding:12px 10px;font-size:.85rem}.table-toolbar{flex-direction:column;padding:18px}.section-toolbar{align-items:start;flex-direction:column}.settings-grid{grid-template-columns:1fr}.settings-section{padding:22px}.carousel-editor{gap:12px}.carousel-editor img{height:140px}.carousel-editor .field>span{font-size:.8rem}.carousel-editor input{width:100%;max-width:100%;font-size:.7rem!important}.order-sheet [data-slot=sheet-header]{padding:25px 22px 15px}.sheet-body{padding:10px 22px 30px}.proof-grid{grid-template-columns:repeat(2,1fr)}.update-editor{grid-template-columns:1fr}.update-editor button{grid-column:1}.review-dialog [data-slot=dialog-footer]{flex-wrap:wrap}.page-section{padding-top:40px}.narrow>.donation-form{margin-top:30px}}
 .will-reveal{opacity:1}.will-reveal.in-view{opacity:1}
+
+/* Immersive home carousel: a calm, editorial hero with clear controls. */
+body:has(.immersive-carousel){background:#f7f4ec}
+body:has(.immersive-carousel) .site-header{position:absolute;inset:0 0 auto;z-index:30;max-width:none;color:#fff;border-bottom-color:#ffffff35;background:linear-gradient(180deg,#041f18b8,transparent);padding-inline:6%}
+body:has(.immersive-carousel) .site-header .brand span{color:#fff}
+body:has(.immersive-carousel) .site-header .brand small{color:#e0b958}
+body:has(.immersive-carousel) .site-header nav{display:none}
+body:has(.immersive-carousel) .site-header .mobile-menu{display:flex;color:#fff;border:1px solid #ffffff80;border-radius:50%;width:48px;height:48px;padding:10px}
+body:has(.immersive-carousel) .site-header .language-select{color:#fff;border-color:#ffffff66;background:#0a392c88}
+body:has(.immersive-carousel) .site-demo{position:absolute;z-index:31;top:104px;right:6%;left:auto;width:min(430px,42vw);background:#f5df69e8;border-radius:999px;font-size:.72rem;padding:5px 14px;text-align:center}
+.hero:has(.immersive-carousel){position:relative;display:block;max-width:none;height:100svh;min-height:680px;padding:0;overflow:hidden;isolation:isolate;background:#063e2b}
+.hero:has(.immersive-carousel) .immersive-carousel-wrap{position:absolute;inset:0;z-index:0;animation:hero-reveal .9s ease both}
+.hero:has(.immersive-carousel) .immersive-carousel{height:100%;border-radius:0;background:#063e2b;box-shadow:none}
+.hero:has(.immersive-carousel) .carousel-track,.hero:has(.immersive-carousel) .action-slide{height:100%;min-height:680px}
+.hero:has(.immersive-carousel) .action-slide>img{height:100%;object-fit:cover;filter:saturate(.82)}
+.hero:has(.immersive-carousel) .slide-shade{background:linear-gradient(90deg,#031f18d9 0%,#06261c91 42%,#06261c42 72%,#06261c80 100%),linear-gradient(0deg,#031f18e8 0%,transparent 45%)}
+.hero:has(.immersive-carousel) .carousel-controls{position:absolute;z-index:5;inset:auto 5% 26px;min-height:58px;padding:0;background:transparent}
+.hero:has(.immersive-carousel) .carousel-dots{gap:6px}
+.hero:has(.immersive-carousel) .carousel-dot{width:42px;height:34px;padding:9px 5px}
+.hero:has(.immersive-carousel) .carousel-dot span{width:32px;height:4px;background:#ffffff66}
+.hero:has(.immersive-carousel) .carousel-dot.active span{width:44px;background:var(--yellow)}
+.hero:has(.immersive-carousel) .carousel-actions{display:flex;align-items:center;gap:8px}
+.hero:has(.immersive-carousel) .carousel-arrow,.hero:has(.immersive-carousel) .carousel-play{width:48px;height:48px;border:1px solid #ffffff75;border-radius:50%;color:#fff;background:#063a2c55}
+.hero:has(.immersive-carousel) .carousel-arrow:hover,.hero:has(.immersive-carousel) .carousel-play:hover{background:#0b573f;color:var(--yellow)}
+.hero:has(.immersive-carousel) .slide-count{color:#fff;font-size:.95rem;letter-spacing:.12em}
+.hero:has(.immersive-carousel) .hero-copy{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;height:100%;max-width:760px;padding:150px 6% 120px;color:#fff;animation:hero-copy-reveal .9s .1s ease both}
+.hero:has(.immersive-carousel) .hero-copy .eyebrow{color:var(--yellow);letter-spacing:.24em}
+.hero:has(.immersive-carousel) .hero-copy h1{font-size:clamp(3.4rem,6.6vw,6.8rem);max-width:780px}
+.hero:has(.immersive-carousel) .hero-copy .lead{color:#f1f4ee;max-width:620px;font-size:clamp(1rem,1.7vw,1.3rem)}
+.hero:has(.immersive-carousel) .hero-copy .text-link{color:#fff;border-color:#ffffff66}
+@keyframes hero-reveal{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
+@keyframes hero-copy-reveal{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+.admin-login-page{min-height:100svh;display:grid;place-items:center;padding:48px 20px;background:radial-gradient(circle at 50% 0,#fffdf8 0,#f7f3ea 58%,#eee9de 100%)}
+.admin-login-card{width:min(100%,672px);padding:54px clamp(28px,6vw,68px);background:#fff;border:1px solid #e9d7a8;border-radius:24px;box-shadow:0 24px 70px #173b2d12;text-align:center}
+.admin-login-icon{width:72px;height:72px;display:grid;place-items:center;margin:0 auto 24px;border-radius:50%;background:var(--green);color:var(--yellow)}
+.admin-login-card .eyebrow{color:#c59b44;margin-bottom:14px;letter-spacing:.24em}
+.admin-login-card h1{font-size:clamp(2.5rem,5vw,4rem);color:var(--green);letter-spacing:-.045em}
+.admin-login-lead{color:#657568;font-size:1.1rem;margin:14px 0 34px}
+.admin-login-fields{display:grid;gap:16px;text-align:left}
+.admin-login-fields input{height:62px;border-color:#d8e4db;border-radius:17px;font-size:1.05rem;padding-inline:22px;background:#fff}
+.admin-login-fields input:disabled{opacity:1;color:#6b796c;background:#fff}
+.admin-login-submit{width:100%;height:62px;margin-top:28px;border-radius:999px;font-size:1.05rem}
+.admin-login-note{margin-top:18px;color:#839083;font-size:.85rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:750px){body:has(.immersive-carousel) .site-header{padding-inline:4%}body:has(.immersive-carousel) .site-demo{top:82px;right:4%;left:4%;width:auto;font-size:.68rem}.hero:has(.immersive-carousel) .carousel-controls{inset-inline:4%;bottom:18px}.hero:has(.immersive-carousel) .hero-copy{padding:140px 6% 110px}.hero:has(.immersive-carousel) .hero-copy h1{font-size:clamp(3rem,12vw,4.2rem)}.hero:has(.immersive-carousel) .action-slide,.hero:has(.immersive-carousel) .carousel-track{min-height:700px}.admin-login-page{padding:28px 14px}.admin-login-card{padding:42px 24px;border-radius:20px}.admin-login-card h1{font-size:2.6rem}.admin-login-lead{font-size:1rem}}
