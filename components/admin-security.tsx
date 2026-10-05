@@ -1,0 +1,10 @@
+"use client";
+import {useState,type FormEvent} from 'react';
+import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
+import {Field,api,humanError} from './public-site';
+export function AdminSecurity(){
+ const [currentPassword,setCurrent]=useState(''),[newPassword,setNew]=useState(''),[confirmation,setConfirmation]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState(''),[saved,setSaved]=useState(false);
+ async function submit(e:FormEvent){e.preventDefault();setError('');setSaved(false);if(newPassword!==confirmation){setError('Les deux nouveaux mots de passe ne correspondent pas.');return;}setBusy(true);try{await api('auth/password',{currentPassword,newPassword,confirmation});setCurrent('');setNew('');setConfirmation('');setSaved(true);}catch(e){setError(humanError((e as Error).message));}finally{setBusy(false);}}
+ return <section className="admin-panel settings-section security-panel"><h2>Changer mon mot de passe</h2><p>Après le changement, les autres sessions seront déconnectées.</p><form onSubmit={submit}><Field label="Mot de passe actuel"><Input type="password" autoComplete="current-password" value={currentPassword} onChange={e=>setCurrent(e.target.value)} required maxLength={128}/></Field><Field label="Nouveau mot de passe"><Input type="password" autoComplete="new-password" value={newPassword} onChange={e=>setNew(e.target.value)} minLength={8} maxLength={128} required/></Field><p className="fineprint">Au moins 8 caractères.</p><Field label="Confirmer le nouveau mot de passe"><Input type="password" autoComplete="new-password" value={confirmation} onChange={e=>setConfirmation(e.target.value)} minLength={8} maxLength={128} required/></Field>{error&&<p className="form-error" role="alert">{error}</p>}{saved&&<p role="status" className="security-success">Votre mot de passe a été modifié.</p>}<Button type="submit" className="button green" disabled={busy}>{busy?'Enregistrement…':'Modifier mon mot de passe'}</Button></form></section>;
+}

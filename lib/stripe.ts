@@ -1,4 +1,4 @@
-import { env } from 'cloudflare:workers';
+const env=process.env;
 import { database,siteOrigin,runtime } from './storage';
 import { recordPaid,type Contribution } from './mail';
 export async function stripe(path:string,body?:URLSearchParams){if(!env.STRIPE_SECRET_KEY)throw new Error('STRIPE_NOT_CONFIGURED');if(runtime().demo)throw new Error('DEMO_MODE');const r=await fetch('https://api.stripe.com/v1/'+path,{method:body?'POST':'GET',headers:{Authorization:`Bearer ${env.STRIPE_SECRET_KEY}`,...(body?{'Content-Type':'application/x-www-form-urlencoded'}:{})},body:body?.toString()});const data:any=await r.json();if(!r.ok)throw new Error(data.error?.message??'STRIPE_ERROR');return data;}

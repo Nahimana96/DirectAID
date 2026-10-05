@@ -1,4 +1,4 @@
-import { env } from 'cloudflare:workers';
+const env=process.env;
 import { database,uuid,siteOrigin,settings,runtime } from './storage';
 import { money,nextWeek,type Locale } from './domain';
 export type Contribution=Record<string,any>;
