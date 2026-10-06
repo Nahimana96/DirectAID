@@ -17,6 +17,10 @@ export async function handleStripe(event:any){
   if(o&&!o.demo)await recordPaid(o,obj.id,obj.amount_paid,obj.currency);
  }
  if(event.type==='checkout.session.async_payment_succeeded'){const o=await db.prepare('SELECT * FROM contributions WHERE stripe_session=?').bind(obj.id).first<Contribution>();if(o&&!o.demo&&obj.mode==='payment')await recordPaid(o,obj.payment_intent,obj.amount_total,obj.currency);}
+ if(event.type==='customer.subscription.updated'||event.type==='customer.subscription.deleted'){
+  const rows=(await db.prepare('SELECT id,details FROM contributions WHERE stripe_subscription=?').bind(obj.id).all()).results;
+  for(const o of rows){const details=JSON.parse(o.details);details.cancelAtPeriodEnd=!!obj.cancel_at_period_end;details.subscriptionStatus=obj.status;await db.prepare('UPDATE contributions SET details=? WHERE id=?').bind(JSON.stringify(details),o.id).run();}
+ }
  if(event.type==='charge.refunded'&&obj.refunded){await db.prepare("UPDATE payments SET status='refunded' WHERE id=?").bind(obj.payment_intent).run();await db.prepare("UPDATE contributions SET status='refunded' WHERE frequency='once' AND id IN (SELECT contribution_id FROM payments WHERE id=?)").bind(obj.payment_intent).run();}
  await db.prepare('INSERT OR IGNORE INTO events (id,created_at) VALUES (?,?)').bind(event.id,new Date().toISOString()).run();
 }

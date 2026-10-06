@@ -12,7 +12,9 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
-    "admin:setup": "node --env-file-if-exists=.env.local scripts/setup-admin.mjs"
+    "admin:setup": "node --env-file-if-exists=.env.local scripts/setup-admin.mjs",
+    "backup": "node --env-file-if-exists=.env.local scripts/backup.mjs",
+    "backup:restore": "node --env-file-if-exists=.env.local scripts/restore-backup.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

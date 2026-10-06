@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./extensions.css";
 
 export const metadata: Metadata = {
   title: "Direct Aid Burundi — Ensemble, agir au plus près",
