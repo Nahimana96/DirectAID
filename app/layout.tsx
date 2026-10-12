@@ -3,6 +3,7 @@ import "./globals.css";
 import "./extensions.css";
 import "./refresh.css";
 import "./admin-dashboard.css";
+import "./card-loading.css";
 
 export const metadata: Metadata = {
   title: "Direct Aid Burundi — Ensemble, agir au plus près",

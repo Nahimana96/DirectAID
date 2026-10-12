@@ -1,0 +1,21 @@
+.page-loading-screen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#104f38;color:#f9faf3;isolation:isolate;animation:page-loading-failsafe .45s 6s forwards;transition:opacity .45s ease,visibility .45s ease}
+.page-loading-screen[data-phase=leaving]{opacity:0;visibility:hidden;pointer-events:none}
+.page-loading-glow{position:absolute;inset:-30%;z-index:-1;background:radial-gradient(ellipse at 25% 20%,#f4df6c18,transparent 48%),radial-gradient(ellipse at 85% 85%,#072f2566,transparent 55%);animation:page-loading-glow 4s ease-in-out infinite alternate}
+.page-loading-content{width:100%;padding:36px 24px;text-align:center;animation:page-loading-arrive .6s ease-out both}
+.page-loading-emblem{width:168px;height:168px;margin:0 auto 32px;position:relative;display:grid;place-items:center}
+.page-loading-emblem img{width:100px;height:100px;border-radius:50%;box-shadow:0 0 0 5px #f5df6915,0 15px 45px #05291f50}
+.page-loading-orbit{position:absolute;inset:0;border:1px solid #f5df692b;border-radius:50%}
+.page-loading-orbit:after{content:'';position:absolute;top:12px;left:23px;width:9px;height:9px;background:#f4df6c;border-radius:50%;box-shadow:0 0 18px #f4df6c66}
+.orbit-one{animation:page-loading-orbit 3.4s linear infinite}.orbit-two{inset:14px;border-style:dashed;opacity:.55;animation:page-loading-orbit 5.5s linear infinite reverse}.orbit-two:after{width:5px;height:5px;top:10px;left:18px}
+.page-loading-brand{font-family:'Segoe UI',Arial,sans-serif;font-size:.72rem;letter-spacing:.3em;font-weight:600;color:#f3df78;margin-bottom:20px}
+.page-loading-brand span{display:block;font-size:.58rem;letter-spacing:.45em;margin-top:8px}
+.page-loading-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.035em;line-height:1.25}
+.page-loading-line{width:100px;height:3px;margin:30px auto 16px;background:#f3df6925;border-radius:4px;overflow:hidden}
+.page-loading-line span{display:block;width:45%;height:100%;background:#f4df6c;border-radius:4px;animation:page-loading-progress 1.25s ease-in-out infinite}
+.page-loading-caption{font-family:'Segoe UI',Arial,sans-serif;font-size:.75rem;color:#c6d6c5;letter-spacing:.04em}
+@keyframes page-loading-orbit{to{transform:rotate(360deg)}}
+@keyframes page-loading-progress{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
+@keyframes page-loading-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes page-loading-glow{to{transform:translate3d(3%,2%,0)}}
+@keyframes page-loading-failsafe{to{opacity:0;visibility:hidden;pointer-events:none}}
+@media(prefers-reduced-motion:reduce){.page-loading-content,.page-loading-orbit,.page-loading-line span,.page-loading-glow{animation:none}.page-loading-screen{transition:none}.page-loading-line span{width:100%}}

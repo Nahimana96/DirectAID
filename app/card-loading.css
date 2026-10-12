@@ -1,0 +1,14 @@
+.card-skeleton{min-width:0;overflow:hidden;border:1px solid #e1e5e2;border-radius:24px;background:#fff}
+.card-placeholder{display:block;background:linear-gradient(100deg,#e5e8e6 25%,#f2f4f2 45%,#e5e8e6 65%);background-size:240% 100%;animation:card-loading-shimmer 1.6s ease-in-out infinite;border-radius:7px}
+.card-skeleton-photo{width:100%;aspect-ratio:1.45;border-radius:0}
+.card-skeleton-body{padding:25px;display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.card-skeleton-badge{width:112px;height:30px;border-radius:999px;margin-bottom:6px}
+.card-skeleton-title{width:90%;height:25px}.card-skeleton-title.short{width:62%;margin-top:-8px}
+.card-skeleton-meta{width:45%;height:18px;margin-top:4px}
+.card-skeleton-link{width:38%;height:20px;margin:6px 0}
+.card-skeleton-progress{width:100%;height:8px;border-radius:999px}
+.card-skeleton-button{width:170px;max-width:80%;height:44px;border-radius:999px;margin-top:10px}
+.projects-grid:not(.card-skeleton-grid)>.project-card,.content-grid:not(.card-skeleton-grid)>.story-card{animation:card-loading-reveal .3s ease-out both}
+@keyframes card-loading-shimmer{from{background-position:160% 0}to{background-position:-80% 0}}
+@keyframes card-loading-reveal{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.card-placeholder,.projects-grid>.project-card,.content-grid>.story-card{animation:none!important}}
