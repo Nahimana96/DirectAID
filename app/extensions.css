@@ -66,3 +66,4 @@
 [data-slot=input][type=file]:not(:disabled)::file-selector-button:active{background:#082f23;transform:scale(.97);box-shadow:none}
 [data-slot=input][type=file]:focus-visible::file-selector-button{outline:2px solid var(--green);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){[data-slot=input][type=file]::file-selector-button{transition:none;transform:none!important}}
+textarea[data-slot=textarea]{field-sizing:fixed;height:128px;min-height:128px;max-height:128px;resize:none;overflow-y:auto;overscroll-behavior:contain}

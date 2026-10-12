@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./extensions.css";
 import "./refresh.css";
+import "./admin-dashboard.css";
 
 export const metadata: Metadata = {
   title: "Direct Aid Burundi — Ensemble, agir au plus près",
