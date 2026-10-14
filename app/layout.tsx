@@ -4,6 +4,7 @@ import "./extensions.css";
 import "./refresh.css";
 import "./admin-dashboard.css";
 import "./card-loading.css";
+import "./donation-wizard.css";
 
 export const metadata: Metadata = {
   title: "Direct Aid Burundi — Ensemble, agir au plus près",
@@ -21,7 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className="antialiased">{children}</body>
+      {/* Browser extensions may inject attributes on body before React hydrates. */}
+      <body className="antialiased" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

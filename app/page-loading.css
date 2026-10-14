@@ -1,5 +1,4 @@
-.page-loading-screen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#104f38;color:#f9faf3;isolation:isolate;animation:page-loading-failsafe .45s 6s forwards;transition:opacity .45s ease,visibility .45s ease}
-.page-loading-screen[data-phase=leaving]{opacity:0;visibility:hidden;pointer-events:none}
+.page-loading-screen{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#104f38;color:#f9faf3;isolation:isolate;}
 .page-loading-glow{position:absolute;inset:-30%;z-index:-1;background:radial-gradient(ellipse at 25% 20%,#f4df6c18,transparent 48%),radial-gradient(ellipse at 85% 85%,#072f2566,transparent 55%);animation:page-loading-glow 4s ease-in-out infinite alternate}
 .page-loading-content{width:100%;padding:36px 24px;text-align:center;animation:page-loading-arrive .6s ease-out both}
 .page-loading-emblem{width:168px;height:168px;margin:0 auto 32px;position:relative;display:grid;place-items:center}
@@ -17,5 +16,4 @@
 @keyframes page-loading-progress{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
 @keyframes page-loading-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes page-loading-glow{to{transform:translate3d(3%,2%,0)}}
-@keyframes page-loading-failsafe{to{opacity:0;visibility:hidden;pointer-events:none}}
-@media(prefers-reduced-motion:reduce){.page-loading-content,.page-loading-orbit,.page-loading-line span,.page-loading-glow{animation:none}.page-loading-screen{transition:none}.page-loading-line span{width:100%}}
+@media(prefers-reduced-motion:reduce){.page-loading-content,.page-loading-orbit,.page-loading-line span,.page-loading-glow{animation:none}.page-loading-line span{width:100%}}

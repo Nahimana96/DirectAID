@@ -1,5 +1,6 @@
 "use client";
 import {AdminNavigation,AdminAccount,adminSections} from './admin-navigation';
+import {PageLoadingScreen} from './page-loading-screen';
 import {ImpactEditor} from "./impact-editor";
 import {AssociationEditor,EntriesEditor,AdminTasks} from './admin-editorial';
 import {initialProfile} from '@/lib/editorial-model';
@@ -27,13 +28,14 @@ const causeNames:Record<string,string>={orphelins:'Orphelins',puits:'Puits',coli
 const statusNames:Record<string,string>={pending:'En attente',paid:'Payé',cancelled:'Annulé',refunded:'Remboursé',queued:'En attente d’envoi',sending:'En cours',sent:'Envoyé',failed:'Échec',skipped:'Ignoré'};
 const emptyProject={title:'',title_en:'',title_ar:'',location:'',description:'',description_en:'',description_ar:'',goal:200000,stage:'planned',published:false,cover:null,updates:[]};
 export default function Admin(){const [data,setData]=useState<any>(null),[error,setError]=useState(''),[tab,setTab]=useState('tasks'),[menuOpen,setMenuOpen]=useState(false),[filter,setFilter]=useState('all'),[search,setSearch]=useState(''),[selected,setSelected]=useState<string|null>(null),[proofs,setProofs]=useState<any[]>([]),[proofMessage,setProofMessage]=useState(''),[project,setProject]=useState<any>(null),[draft,setDraft]=useState<Settings|null>(null),[busy,setBusy]=useState(false),[confirm,setConfirm]=useState<{title:string;text:string;payload:any}|null>(null),[schedule,setSchedule]=useState('');
- async function reload(){try{const d=await api('admin');setData(d);setError('');}catch(e){setError(humanError((e as Error).message));}}
+ async function reload(){setError('');try{const d=await api('admin');setData(d);setError('');}catch(e){setError(humanError((e as Error).message));}}
  useEffect(()=>{reload();},[]);useEffect(()=>{if(selected){api('admin/proofs?id='+selected).then(r=>setProofs(r.assets)).catch(e=>toast.error(humanError(e.message)));setSchedule('');setProofMessage('');}else setProofs([]);},[selected]);
  async function mutate(payload:any){setBusy(true);try{await api('admin',payload);await reload();toast.success('Modification enregistrée.');setConfirm(null);return true;}catch(e){toast.error(humanError((e as Error).message));return false;}finally{setBusy(false);}}
  async function upload(file:File,cid?:string,document=false){setBusy(true);try{const form=new FormData();form.set('file',file);if(document)form.set('document','true');if(cid)form.set('contributionId',cid);const res=await fetch('/api/admin/upload',{method:'POST',body:form});const body:any=await res.json();if(!res.ok)throw new Error(body.error);return body;}catch(e){toast.error(humanError((e as Error).message));}finally{setBusy(false);}}
  useEffect(()=>{if(!menuOpen)return;const close=(event:KeyboardEvent)=>{if(event.key==='Escape')setMenuOpen(false);};window.addEventListener('keydown',close);return()=>window.removeEventListener('keydown',close);},[menuOpen]);
  function ask(title:string,text:string,payload:any){setConfirm({title,text,payload});}
- if(!data)return <main className="section narrow"><h1 className="page-title">Administration</h1><p role="status">{error||'Chargement du tableau de bord…'}</p>{error&&<Button onClick={reload}>Réessayer</Button>}<a href="/">Retour au site</a></main>;
+ if(!data&&!error)return <PageLoadingScreen/>;
+ if(!data)return <main className="section narrow"><h1 className="page-title">Administration</h1><p role="alert">{error}</p>{error&&<Button onClick={reload}>Réessayer</Button>}<a href="/">Retour au site</a></main>;
  const orders=data.orders as any[];const order=orders.find(o=>o.id===selected);const shown=orders.filter(o=>(filter==='all'||(filter==='pledges'?o.status==='pending'&&o.method==='transfer':o.status===filter))&&[o.name,o.email,o.reference,causeNames[o.cause]].join(' ').toLowerCase().includes(search.toLowerCase()));const paid=orders.filter(o=>o.status==='paid');const pending=orders.filter(o=>o.status==='pending'&&o.method==='transfer');
  return <div className="admin-app admin-dashboard"><Toaster richColors/>
  <div className="admin-mobile-bar"><a className="brand" href="/"><img src="/logo-directaid.jpeg" alt=""/><span>Direct Aid<small>ADMINISTRATION</small></span></a><Button variant="ghost" id="admin-menu-toggle" aria-label={menuOpen?'Fermer le menu':'Ouvrir le menu'} aria-expanded={menuOpen} aria-controls="admin-sidebar" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X size={22}/>:<Menu size={22}/>}</Button></div>
