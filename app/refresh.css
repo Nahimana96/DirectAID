@@ -77,3 +77,21 @@
 @media(max-width:480px){.public-shell #actions .action-grid,.public-shell .projects-grid{grid-template-columns:1fr}.public-shell .action-photo{aspect-ratio:1.7}.public-shell .footer-grid{grid-template-columns:1fr}.public-shell .footer-about,.public-shell .footer-contact,.public-shell .footer-pending,.public-shell .footer-column:not(.footer-contact):not(.footer-pending),.visual-stamp{right:0;font-size:.66rem}.public-shell .form-body{padding:20px}.public-shell .form-heading{padding:24px 20px 0}}
 @media(prefers-reduced-motion:reduce){.action-photo{transition:none}}
 
+/* Keep the hero height steady while the message follows the selected photo. */
+.home-hero .campaign-copy{display:grid;width:100%;animation:none}
+.campaign-message{grid-area:1/1;min-width:0;opacity:0;transform:translateY(14px);visibility:hidden;transition:opacity .55s ease,transform .65s cubic-bezier(.22,1,.36,1),visibility 0s .65s}
+.campaign-message.is-active{opacity:1;transform:translateY(0);visibility:visible;transition-delay:.1s,.1s,0s}
+.home-hero .campaign-message:not(.is-active) a{pointer-events:none}
+.campaign-hero .hero-buttons .button{gap:12px;max-width:100%;white-space:normal;height:auto;text-align:center}
+.campaign-hero .hero-buttons .button svg{flex-shrink:0}
+@media(max-width:700px){
+  .home-hero.campaign-hero{padding-top:130px}
+  .home-hero .campaign-copy h1{font-size:clamp(2.5rem,10vw,4rem)}
+  .campaign-hero .hero-buttons{align-items:flex-start;flex-direction:column;gap:18px}
+  .campaign-hero .hero-buttons .button{font-size:.9rem;padding:16px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .campaign-message,.home-hero .action-slide>img{transition:none;transform:none}
+  .home-hero .action-slide[aria-hidden=false]>img{transform:none}
+}
+
