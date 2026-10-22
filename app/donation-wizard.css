@@ -1,7 +1,5 @@
-html:has(.donation-wizard),body:has(.donation-wizard){height:100%;overflow:hidden}
-.public-shell:has(.donation-wizard){height:100dvh;overflow:clip}
-.public-shell:has(.donation-wizard)>main{height:100%;min-height:0;overflow:clip}
-.public-shell:has(.donation-wizard)>.site-footer{display:none}
+.public-shell:has(.donation-wizard){min-height:100dvh;overflow:visible}
+.public-shell:has(.donation-wizard)>main{height:calc(100dvh - var(--header-height));min-height:0;overflow:clip}
 .public-shell main>.section:has(.donation-wizard){height:100%;min-height:0;width:100%;margin:0 auto;padding:16px 5%;display:flex;flex-direction:column;overflow:clip}
 .public-shell .section:has(.donation-wizard)>.eyebrow,.public-shell .section:has(.donation-wizard)>.page-intro{display:none}
 .public-shell .section:has(.donation-wizard)>.page-title{font-size:1.6rem;margin:0 0 14px;flex-shrink:0}
@@ -18,6 +16,10 @@ html:has(.donation-wizard),body:has(.donation-wizard){height:100%;overflow:hidde
 .public-shell .donation-wizard .form-heading{flex-shrink:0;padding:12px 24px 0}.public-shell .donation-wizard .form-heading h2{font-size:1.2rem}.public-shell .donation-wizard .form-heading svg{width:21px;height:21px}
 .public-shell .donation-wizard .wizard-body{flex:1;min-height:0;padding:0;gap:0;overflow:hidden}
 .wizard-step{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px 24px;display:flex;flex-direction:column;gap:8px}
+.wizard-step.step-forward{animation:wizard-step-forward .38s cubic-bezier(.2,.7,.2,1) both}
+.wizard-step.step-back{animation:wizard-step-back .38s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wizard-step-forward{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
+@keyframes wizard-step-back{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:translateX(0)}}
 .public-shell .donation-wizard .field{gap:4px}.public-shell .donation-wizard .field>span{font-size:.78rem}
 .public-shell .donation-wizard input,.public-shell .donation-wizard [data-slot=select-trigger]{height:40px;min-height:40px;font-size:.9rem}
 .public-shell .donation-wizard textarea[data-slot=textarea]{height:96px;min-height:96px;max-height:96px;font-size:.9rem}
@@ -33,6 +35,10 @@ html:has(.donation-wizard),body:has(.donation-wizard){height:100%;overflow:hidde
 .public-shell .donation-wizard .total-row{border:0;padding:0 0 8px;font-size:.88rem;min-height:34px}.public-shell .donation-wizard .total-row strong{font-family:inherit;font-size:1.35rem;font-weight:650}
 .wizard-buttons{display:flex;gap:10px;align-items:stretch}.wizard-buttons>button{min-height:44px;height:auto}.public-shell .donation-wizard .wizard-buttons .button{flex:1 1 0;min-width:0;width:auto;white-space:normal;overflow-wrap:anywhere;min-height:44px;padding:9px 16px;font-size:.85rem}
 .public-shell .donation-wizard .fineprint{font-size:.65rem;line-height:1.4;margin-top:8px}.wizard-footer .form-error{font-size:.8rem;padding:8px;margin-bottom:8px}
+.wizard-security{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid #e4ebe2;color:#526c5e;font-size:.72rem;line-height:1.3;text-align:center}
+.wizard-security svg{flex:none;color:var(--green)}
+.wizard-security strong{color:var(--green);font-weight:700}
+@media(prefers-reduced-motion:reduce){.wizard-step.step-forward,.wizard-step.step-back{animation:none}}
 .review-dialog{max-height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:14px}.review-dialog .review-list{gap:10px;font-size:.85rem;min-height:0;overflow:auto}.review-dialog [data-slot=dialog-footer]{flex-shrink:0;display:flex;flex-wrap:wrap}.review-dialog [data-slot=dialog-footer]>button{flex:1;white-space:normal;min-height:44px}.review-recipient-controls{display:flex;gap:10px}
 @media(max-width:760px){.public-shell main>.section:has(.donation-wizard){padding:10px 12px}.public-shell .section:has(.donation-wizard)>.page-title{font-size:1.15rem;margin-bottom:8px}.public-shell .section:has(.donation-wizard)>.donation-layout{display:flex;gap:0}.public-shell .section:has(.donation-wizard) .action-explainer,.public-shell .section:has(.donation-wizard) .donation-layout>.donation-visual{display:none}.donation-wizard{width:100%;border-radius:18px!important}.donation-stepper{padding:12px 16px 10px;gap:6px}.donation-stepper>span{flex-direction:column;text-align:center;gap:4px;font-size:.65rem}.public-shell .donation-wizard .form-heading{padding:10px 16px 0}.wizard-step{padding:12px 16px;gap:10px}.wizard-footer{padding:10px 16px max(10px,env(safe-area-inset-bottom))}.public-shell .donation-wizard .two-fields{grid-template-columns:1fr 1fr}.public-shell .donation-wizard h3{font-size:1rem}.public-shell .donation-wizard textarea[data-slot=textarea]{height:96px;min-height:96px;max-height:96px;font-size:.9rem}.review-dialog{padding:20px;gap:12px}.review-dialog [data-slot=dialog-title]{font-size:1.15rem}.review-dialog [data-slot=dialog-description]{font-size:.8rem}}
 @media(max-width:760px){.public-shell .donation-wizard .form-heading{display:none}.wizard-step{gap:8px}}

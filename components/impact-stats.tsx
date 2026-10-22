@@ -1,11 +1,13 @@
 "use client";
 import {useEffect,useRef,useState} from 'react';
-import {HeartHandshake,Droplets,Wheat,HandHeart} from 'lucide-react';
+import {CalendarDays,Euro,UsersRound} from 'lucide-react';
 import type {ImpactStat,Locale} from '@/lib/domain';
+import {fixedImpactMetrics} from '@/lib/impact-metrics';
+
 function Counter({item,locale,index}:{item:ImpactStat;locale:Locale;index:number}){
  const ref=useRef<HTMLDivElement>(null),[number,setNumber]=useState(item.value);
  useEffect(()=>{
-  const node=ref.current;if(!node)return;
+  const node=ref.current;if(!node||!item.value)return;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   if(reduced.matches)return;
   let frame=0;setNumber(0);
@@ -20,14 +22,13 @@ function Counter({item,locale,index}:{item:ImpactStat;locale:Locale;index:number
   reduced.addEventListener('change',onChange);
   return()=>{observer.disconnect();cancelAnimationFrame(frame);reduced.removeEventListener('change',onChange);};
  },[item.value]);
- const Icon=[HeartHandshake,Droplets,Wheat,HandHeart][index%4];
- const label=locale==='en'?(item.labelEn||item.label):locale==='ar'?(item.labelAr||item.label):item.label;
+ const Icon=[UsersRound,CalendarDays,Euro][index];
+ const label=locale==='en'?item.labelEn:locale==='ar'?item.labelAr:item.label;
  const format=(n:number)=>new Intl.NumberFormat(locale).format(n)+item.suffix;
- return <div ref={ref} className="impact-item"><Icon aria-hidden="true"/><strong aria-label={format(item.value)}><span aria-hidden="true">{format(number)}</span></strong><p>{label}</p></div>;
-}
-export function ImpactStats({items=[],locale}:{items?:ImpactStat[];locale:Locale}){
- if(!items.length)return null;
- const t=(fr:string,en:string,ar:string)=>locale==='en'?en:locale==='ar'?ar:fr;
- return <section className="impact-section section" aria-labelledby="impact-title"><div className="impact-heading"><p className="eyebrow">{t('LA SOLIDARITÉ EN ACTION','SOLIDARITY IN ACTION','التضامن في العمل')}</p><h2 id="impact-title">{t('Ensemble, nous avançons.','Together, we move forward.','معاً نتقدم.')}</h2></div><div className="impact-grid">{items.map((item,i)=><Counter key={i} item={item} locale={locale} index={i}/>)}</div></section>;
+ return <div ref={ref} className="impact-item"><Icon aria-hidden="true"/><strong aria-label={item.value?format(item.value):'À renseigner'}><span aria-hidden="true">{item.value?format(number):'—'}</span></strong><p>{label}</p></div>;
 }
 
+export function ImpactStats({items=[],locale}:{items?:ImpactStat[];locale:Locale}){
+ const t=(fr:string,en:string,ar:string)=>locale==='en'?en:locale==='ar'?ar:fr;
+ return <section className="impact-section section" aria-labelledby="impact-title"><div className="impact-heading"><p className="eyebrow">{t('NOS CHIFFRES','OUR IMPACT','أرقامنا')}</p><h2 id="impact-title">{t('Notre impact en chiffres','Our impact in numbers','أثرنا بالأرقام')}</h2></div><div className="impact-grid">{fixedImpactMetrics(items).map((item,i)=><Counter key={i} item={item} locale={locale} index={i}/>)}</div></section>;
+}

@@ -1,7 +1,16 @@
 "use client";
 import type {ImpactStat} from '@/lib/domain';
-export function ImpactEditor({items,onChange}:{items:ImpactStat[];onChange:(items:ImpactStat[])=>void}){
- function update(i:number,patch:Partial<ImpactStat>){onChange(items.map((x,k)=>k===i?{...x,...patch}:x));}
- return <section className="admin-panel settings-section impact-editor"><h2>Les chiffres de notre impact</h2><p>Ces chiffres apparaissent sur l’accueil et s’animent au défilement. Renseignez uniquement des résultats vérifiés. Sans chiffre, la section reste masquée.</p>{items.map((x,i)=><fieldset className="editor-item" key={i}><legend>Chiffre {i+1}</legend><div className="two-fields"><label className="field"><span>Valeur</span><input type="number" min="0" max="1000000000" step="1" required value={x.value} onChange={e=>update(i,{value:Number(e.target.value)})}/></label><label className="field"><span>Suffixe (facultatif, ex. +)</span><input maxLength={8} value={x.suffix} onChange={e=>update(i,{suffix:e.target.value})}/></label></div>{([['label','Libellé français'],['labelEn','Libellé anglais'],['labelAr','Libellé arabe']] as const).map(([key,label])=><label className="field" key={key}><span>{label}</span><input required={key==='label'} maxLength={100} dir={key==='labelAr'?'rtl':undefined} value={x[key]} onChange={e=>update(i,{[key]:e.target.value})}/></label>)}<button type="button" className="text-link" onClick={()=>onChange(items.filter((_,k)=>k!==i))}>Retirer ce chiffre</button></fieldset>)}{items.length<4&&<button className="button green" type="button" onClick={()=>onChange([...items,{value:0,suffix:'',label:'',labelEn:'',labelAr:''}])}>Ajouter un chiffre</button>}<p className="fineprint">Utilisez « Enregistrer les réglages » pour publier les modifications.</p></section>;
-}
+import {fixedImpactMetrics} from '@/lib/impact-metrics';
 
+export function ImpactEditor({items,onChange}:{items:ImpactStat[];onChange:(items:ImpactStat[])=>void}){
+ const metrics=fixedImpactMetrics(items);
+ return <section className="admin-panel settings-section impact-editor">
+  <h2>Les chiffres de notre impact</h2>
+  <p>Ces trois chiffres apparaissent sur l’accueil, avant « La confiance », et s’animent à l’écran. Laissez un champ vide tant que sa valeur n’est pas vérifiée.</p>
+  <div className="impact-editor-grid">{metrics.map((metric,index)=><label className="field" key={metric.label}>
+   <span>{metric.label}{index===2?' (€)':''}</span>
+   <input type="number" min="1" max="1000000000" step="1" inputMode="numeric" value={metric.value||''} placeholder="À renseigner" onChange={event=>onChange(metrics.map((item,i)=>i===index?{...item,value:event.target.value?Number(event.target.value):0}:item))}/>
+  </label>)}</div>
+  <p className="fineprint">Les champs vides s’affichent avec un tiret. Enregistrez les réglages pour publier les valeurs.</p>
+ </section>;
+}

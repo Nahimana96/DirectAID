@@ -24,6 +24,13 @@
 .donation-visual{position:relative;display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:10px;background:#fff;border-radius:32px;aspect-ratio:1.12;margin-bottom:32px;min-width:0}
 .donation-visual img{height:100%;width:100%;object-fit:cover;min-height:0;border-radius:23px}
 .donation-visual .visual-main{grid-row:1/3}
+.donation-story{display:block;isolation:isolate;overflow:hidden;padding:0;background:var(--green);aspect-ratio:1.12;box-shadow:0 18px 48px #123d2c1a}
+.donation-story::after{content:"";position:absolute;inset:32% 0 0;background:linear-gradient(180deg,transparent,#072f25d9);z-index:0;pointer-events:none}
+.donation-story .visual-main{position:absolute;inset:0;width:100%;height:100%;border-radius:0;object-position:center 42%}
+.donation-story-copy{position:absolute;z-index:1;inset:auto 28px 28px;color:#fff;display:grid;gap:10px}
+.donation-story-copy span{color:var(--yellow);font-size:.75rem;letter-spacing:.19em;font-weight:750}
+.donation-story-copy strong{font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.9rem);line-height:1.12;font-weight:400;max-width:15ch}
+.donation-story-copy p{max-width:35ch;font-size:.9rem;line-height:1.5;color:#f4f7f0}
 .visual-stamp{position:absolute;right:-12px;top:32px;display:flex;align-items:center;gap:8px;border-radius:999px;background:#fff;color:var(--green);font-size:.72rem;font-weight:650;padding:12px 15px;box-shadow:0 8px 24px #123d2c14}
 .visual-stamp svg{color:#8d7a21}
 .visual-seal{position:absolute;bottom:24px;left:24px;display:grid;place-items:center;background:var(--yellow);color:var(--green);width:49px;height:49px;border:5px solid white;border-radius:50%}
@@ -61,6 +68,10 @@
 .impact-heading{text-align:center;margin-bottom:40px}.impact-section .eyebrow{color:var(--yellow)}.impact-heading h2{font-size:clamp(2rem,3vw,2.9rem)}
 .impact-grid{display:flex;justify-content:center;flex-wrap:wrap;gap:25px}.impact-item{flex:1;min-width:170px;text-align:center;padding:20px 16px;border-inline-end:1px solid #ffffff26}.impact-item:last-child{border:0}.impact-item>svg{margin:0 auto 16px;color:var(--yellow);width:30px;height:30px}.impact-item strong{display:block;color:var(--yellow);font-size:clamp(2.5rem,5vw,4rem);font-variant-numeric:tabular-nums;line-height:1.2}.impact-item p{margin-top:12px;font-size:.95rem}
 .impact-editor{grid-column:1/-1;display:grid;gap:20px}.impact-editor .editor-item{background:#f8faf5}.impact-editor input{border:1px solid #cad5c8;border-radius:8px;padding:10px;width:100%;background:white}.impact-editor>.button{justify-self:start}
+.impact-editor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.impact-editor-grid .field{min-width:0}
+.impact-editor-grid input{height:54px}
+@media(max-width:900px){.impact-editor-grid{grid-template-columns:1fr}}
 .public-shell .expanded-footer{background:#edf2e9;color:var(--green);border-top:1px solid #dce5d6;padding:0 5%;display:block}
 .public-shell .footer-appeal{display:none}
 .public-shell .footer-grid{display:grid;grid-template-columns:1.2fr 1fr .85fr 1.25fr;gap:36px;padding:64px 0 48px;max-width:1300px;margin:auto}
@@ -95,3 +106,48 @@
   .home-hero .action-slide[aria-hidden=false]>img{transform:none}
 }
 
+/* Current campaigns: editorial cards in the association's green and yellow. */
+.home-campaigns{background:#f0f4ed;max-width:none!important;padding-block:72px!important}
+.campaigns-heading{text-align:center;max-width:760px;margin:0 auto 42px}
+.campaigns-heading h2{display:inline-block;background:var(--green);color:#fff;padding:10px 24px;border-radius:8px;font-family:inherit;font-weight:750;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.035em;margin:12px 0 18px}
+.campaigns-heading>p:last-child{color:#627365;line-height:1.7;margin:0 auto;max-width:640px}
+.home-campaign-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;max-width:1250px;margin:auto;align-items:stretch}
+.home-campaign-card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 30px #123d2c0b;border:1px solid #dfe7dc;display:flex;flex-direction:column;min-width:0;transition:transform .25s ease,box-shadow .25s ease}
+.home-campaign-card:hover{transform:translateY(-5px);box-shadow:0 16px 35px #123d2c17}
+.home-campaign-cover{width:100%;aspect-ratio:1.5;object-fit:cover;display:block}
+.home-campaign-body{padding:0 26px 28px;display:flex;flex-direction:column;align-items:center;text-align:center;flex:1}
+.campaign-cause{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:var(--yellow);border:4px solid #fff;border-radius:999px;padding:10px 18px;margin-top:-25px;position:relative;font-weight:650;font-size:.8rem;max-width:100%}
+.campaign-cause svg{flex-shrink:0}
+.home-campaign-body h3{font-family:inherit;font-weight:750;font-size:1.5rem;line-height:1.2;margin:22px 0 16px;overflow-wrap:anywhere;color:var(--green)}
+.campaign-excerpt{color:#627365;font-size:.95rem;line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line;margin:0 0 24px}
+.campaign-funding{margin-top:auto;width:100%;padding-bottom:16px}
+.campaign-funding p{font-size:.8rem;color:#627365;margin-top:8px}
+.home-campaign-body .story-modal-trigger{margin:0 0 16px;font-size:.85rem}
+.home-campaign-body .campaign-donate{display:inline-flex;justify-content:center;gap:10px;align-items:center;border-radius:999px;padding:12px 24px;min-height:44px;font-size:.85rem;max-width:100%;white-space:normal}
+.campaigns-all{display:flex;width:fit-content;align-items:center;gap:8px;margin:32px auto 0}
+.campaigns-empty{padding:32px;text-align:center;background:#fff;border:1px solid #dfe7dc;border-radius:20px;max-width:760px;margin:auto;color:#627365;line-height:1.7}
+.campaigns-empty .text-link{display:block;width:fit-content;margin:16px auto 0}
+@media(max-width:1000px){.home-campaign-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.home-campaigns{padding-block:45px!important}.home-campaign-grid{grid-template-columns:1fr;max-width:440px}.campaigns-heading{margin-bottom:30px}.campaigns-heading h2{padding:10px 18px}.home-campaign-body{padding-inline:22px}}
+@media(prefers-reduced-motion:reduce){.home-campaign-card{transition:none}.home-campaign-card:hover{transform:none}}
+/* Footer and dashboard cards use the same deep green and warm gold as the site. */
+.public-shell .expanded-footer{background:#103f31;color:#f7f8ed;border-top:4px solid #efda69;padding:0 5%}
+.public-shell .footer-grid{grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,48px);padding:54px 0 45px}
+.public-shell .footer-grid>*{min-width:0;right:auto}
+.public-shell .expanded-footer .brand span,.public-shell .footer-column h3{color:#fff}
+.public-shell .expanded-footer .brand small{color:#f3dd6a}
+.public-shell .expanded-footer p,.public-shell .footer-column>a,.public-shell .footer-bottom a,.public-shell .footer-bottom p{color:#d7e5d8;font-size:.87rem;line-height:1.7}
+.public-shell .footer-about>p{margin-top:22px;max-width:34ch}
+.public-shell .footer-column>a{overflow-wrap:anywhere}
+.public-shell .footer-column>a:hover,.public-shell .footer-bottom a:hover{color:#f3dd6a}
+.public-shell .footer-contact small{color:#b8d0bd}
+.public-shell .footer-contact .footer-whatsapp{color:#f3dd6a;border-color:#749481}
+.public-shell .footer-bottom{border-top:1px solid #ffffff35}
+.public-shell .footer-project strong{color:#fff}
+.public-shell .mini-progress{background:#ffffff35}.public-shell .mini-progress i{background:#f3dd6a}
+.admin-dashboard .stat-grid>div{border:1px solid #d9e7d6;background:linear-gradient(145deg,#fffdf5,#e7f0e4);box-shadow:0 9px 24px #104f3810;border-radius:22px}
+.admin-dashboard .stat-grid>div:nth-child(2),.admin-dashboard .stat-grid>div:nth-child(4){background:linear-gradient(145deg,#fffef8,#f2f0db)}
+.admin-dashboard .stat-grid>div:after{background:linear-gradient(90deg,#104f38 0 60%,#f2de6a 100%);height:4px}
+.admin-dashboard .stat-grid svg{color:#104f38}.admin-dashboard .stat-grid strong{color:#104f38;font-size:2.5rem}
+@media(max-width:1100px){.public-shell .footer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.public-shell .footer-grid{grid-template-columns:minmax(0,1fr);gap:0;padding:36px 0 24px}.public-shell .footer-grid>*{grid-column:1!important;grid-row:auto!important;padding:22px 0;border-bottom:1px solid #ffffff26;font-size:inherit;right:auto}.public-shell .footer-about{padding-top:0}.public-shell .footer-column h3{margin-bottom:13px}.public-shell .footer-column>a{padding-block:5px}.public-shell .footer-bottom{padding-block:22px}.admin-dashboard .stat-grid strong{font-size:2rem}}
