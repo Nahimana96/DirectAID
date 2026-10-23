@@ -1,13 +1,13 @@
 import {ArrowUpRight,Mail,Phone,MessageCircle,MapPin} from 'lucide-react';
-import {type Locale,type Settings} from '@/lib/domain';
-import {activeCampaigns} from '@/lib/campaigns';
+import {type Locale,type Settings,type Project} from '@/lib/domain';
+import {activeCampaignListings} from '@/lib/campaigns';
 import {textAt,type ContentEntry,type AssociationProfile} from '@/lib/editorial-model';
 
-export function SiteFooter({settings:s,locale:l,profile:p,entries=[]}:{settings:Settings;locale:Locale;profile:AssociationProfile;entries?:ContentEntry[]}){
+export function SiteFooter({settings:s,locale:l,profile:p,entries=[],projects=[]}:{settings:Settings;locale:Locale;profile:AssociationProfile;entries?:ContentEntry[];projects?:Project[]}){
  const t=(fr:string,en:string,ar:string)=>l==='en'?en:l==='ar'?ar:fr;
  const href=(path:string)=>`${path}?lang=${l}`;
  const links=[['/association',t('Notre association','About us','جمعيتنا')],['/realisations',t('Nos réalisations','Our achievements','إنجازاتنا')],['/campagnes',t('Nos campagnes','Our campaigns','حملاتنا')],['/temoignages',t('Témoignages','Donor stories','آراء المتبرعين')],['/faq',t('Questions fréquentes','Frequently asked questions','الأسئلة الشائعة')],['/espace-donateur',t('Mon espace donateur','My donor area','مساحة المتبرع')]];
- const pending=activeCampaigns(entries).slice(0,3).map(e=>({id:e.id,title:textAt(e.title,l),url:href('/campagnes')+'#'+e.id,image:e.images[0]?'/api/media/'+e.images[0]:'/action-'+e.cause+'.webp',percent:Math.min(100,Math.round(e.collected/e.goal*100))}));
+ const pending=activeCampaignListings(entries,projects).slice(0,3).map(e=>({id:e.id,title:textAt(e.title,l),url:href('/campagnes')+'#'+e.id,image:e.images[0]?'/api/media/'+e.images[0]:'/action-'+e.cause+'.webp',percent:Math.min(100,Math.round(e.collected/e.goal*100))}));
  const phones=[s.phone,s.phone2].filter(Boolean);
  return <footer className="site-footer expanded-footer">
   <div className="footer-appeal"><div><p className="eyebrow">{t('ENSEMBLE, AU BURUNDI','TOGETHER, IN BURUNDI','معاً في بوروندي')}</p><h2>{t('Chaque geste compte.','Every gesture counts.','كل عطاء يحدث فرقاً.')}</h2><p>{t('Un repas, de l’eau, un avenir. Votre solidarité se transforme en action.','A meal, water, a future. Your solidarity becomes meaningful action.','وجبة، ماء، مستقبل. يتحول تضامنكم إلى عمل ملموس.')}</p></div><a href={href('/donner')} className="button yellow">{t('Faire un don','Donate','تبرّع')}<ArrowUpRight size={19} aria-hidden="true"/></a></div>

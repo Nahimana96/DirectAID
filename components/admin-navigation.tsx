@@ -1,6 +1,6 @@
 "use client";
 
-import {LayoutDashboard,Info,Images,Megaphone,HeartHandshake,Mail,MessageSquare,Settings,ShieldCheck,ExternalLink,LogOut} from 'lucide-react';
+import {LayoutDashboard,Info,Images,Megaphone,Droplets,HeartHandshake,Mail,MessageSquare,Settings,ShieldCheck,ExternalLink,LogOut} from 'lucide-react';
 import {TabsList,TabsTrigger} from './ui/tabs';
 import {Button} from './ui/button';
 
@@ -9,6 +9,7 @@ export const adminSections=[
  {value:'association',label:'À propos & FAQ',title:'À propos & FAQ',icon:Info},
  {value:'realisations',label:'Réalisations',title:'Réalisations',icon:Images},
  {value:'campaigns',label:'Campagnes',title:'Campagnes',icon:Megaphone},
+ {value:'projects',label:'Projets de puits',title:'Projets de puits',icon:Droplets},
  {value:'donations',label:'Dons & promesses',title:'Dons & promesses',icon:HeartHandshake},
  {value:'emails',label:'E-mails',title:'E-mails',icon:Mail},
  {value:'testimonials',label:'Témoignages',title:'Témoignages',icon:MessageSquare},

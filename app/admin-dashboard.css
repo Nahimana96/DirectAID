@@ -19,12 +19,11 @@
 .admin-dashboard .admin-title .eyebrow{font-size:.6rem;letter-spacing:.16em;color:#708468;margin-bottom:9px}
 .admin-subtitle{font-size:.78rem;color:#74816e;margin-top:8px}
 .admin-dashboard .admin-refresh{border-radius:999px;background:#fff;border-color:#d9e1d3;font-size:.8rem;padding:10px 17px;box-shadow:none;height:40px;flex-shrink:0}
-.admin-dashboard .stat-grid{gap:14px;margin-bottom:28px}
-.admin-dashboard .stat-grid>div{border:1px solid #fff;background:linear-gradient(145deg,#ffffffc7,#ffffff65);border-radius:20px;padding:20px;gap:9px;position:relative;overflow:hidden}
-.admin-dashboard .stat-grid>div:after{content:'';display:block;grid-column:1/-1;height:3px;margin-top:6px;border-radius:3px;background:linear-gradient(90deg,#104f38 0 35%,#f2de6a 65%,#e9eedf 100%)}
+.admin-dashboard .stat-grid{gap:12px;margin-bottom:22px}
+.admin-dashboard .stat-grid>div{border:1px solid #fff;background:linear-gradient(145deg,#ffffffc7,#ffffff65);border-radius:18px;padding:15px 17px;gap:5px;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;min-height:95px}
 .admin-dashboard .stat-grid span{font-size:.72rem;line-height:1.5;color:#6a7a65}
 .admin-dashboard .stat-grid svg{width:20px;height:20px;color:#75956d;grid-row:1}
-.admin-dashboard .stat-grid strong{font-size:2.15rem;font-weight:600;letter-spacing:-.05em;line-height:1.1;color:#143c30}
+.admin-dashboard .stat-grid strong{font-size:1.8rem;font-weight:600;letter-spacing:-.05em;line-height:1;color:#143c30}
 .admin-dashboard .admin-main>[data-slot=tabs-content]{margin-top:0;min-width:0}
 .admin-dashboard .admin-panel,.admin-dashboard .person-card,.admin-dashboard .project-card,.admin-dashboard .story-card{border:1px solid #ffffffed;border-radius:22px;background:#ffffffa6;box-shadow:0 3px 12px #28462704}
 .admin-dashboard .section-toolbar{margin:4px 0 22px;align-items:center}
@@ -72,9 +71,27 @@ html:has(.admin-dashboard),body:has(.admin-dashboard){height:100%;overflow:hidde
 @media(max-height:650px){.admin-dashboard .admin-main{padding-top:18px;padding-bottom:18px}.admin-dashboard .admin-title{margin-bottom:16px}.admin-subtitle{display:none}.admin-dashboard .stat-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px;gap:8px}.admin-dashboard .stat-grid>div{padding:10px;gap:5px}.admin-dashboard .stat-grid strong{font-size:1.5rem}.admin-dashboard .stat-grid svg{display:none}.admin-dashboard .stat-grid span{font-size:.62rem}.admin-dashboard .admin-title h1{font-size:1.5rem}.admin-dashboard .admin-title .eyebrow{margin-bottom:5px}.admin-header-actions{gap:7px}}
 
 .proof-email-dialog{width:min(780px,calc(100vw - 24px));max-width:780px!important;height:min(850px,calc(100dvh - 24px));display:flex;flex-direction:column;gap:14px;overflow:auto}.proof-email-addresses{font-size:.85rem;overflow-wrap:anywhere;flex-shrink:0}.proof-email-dialog iframe{width:100%;flex:1;min-height:180px;border:1px solid var(--border);border-radius:12px;background:white}.proof-email-dialog [data-slot=dialog-footer]{flex-shrink:0}.proof-email-dialog .form-error{font-size:.85rem;margin:0}
-.campaign-project-management{margin-top:28px;border:1px solid #d8e2d3;border-radius:20px;padding:18px 22px;background:#f9fbf6}
-.campaign-project-management>summary{cursor:pointer;color:var(--green);font-weight:650;padding:8px 0}
-.campaign-project-management[open]>summary{margin-bottom:20px}
 .campaign-project-actions{display:flex;gap:10px;flex-wrap:wrap}
+.admin-project-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.admin-project-list .story-body .fineprint{margin:8px 0;color:var(--green)}
+.campaign-project-drafts{border:1px solid #d8e2d3;border-radius:12px;padding:10px 14px}.campaign-project-drafts summary{cursor:pointer;color:var(--green);font-weight:600}.campaign-project-drafts>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 0;border-top:1px solid #d8e2d3}.campaign-project-drafts>div:first-of-type{margin-top:10px}.campaign-project-drafts>div span{margin-right:auto}
 
 .admin-security-stack{display:grid;gap:20px}.admin-users-add{display:flex;align-items:end;gap:12px;flex-wrap:wrap}.admin-users-add .field{flex:1;min-width:220px}.admin-users-list{list-style:none;padding:0;margin:0}.admin-users-list li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid #d9e1d3}.admin-users-list small{display:block;color:#6a7a65;margin-top:4px}
+
+@media(max-width:1200px){.admin-dashboard .stat-grid>div{padding:14px 16px}}
+@media(max-width:850px){
+ .admin-dashboard .admin-sidebar{display:flex;transform:translateX(calc(-100% - 20px));opacity:0;visibility:hidden;pointer-events:none;transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .24s ease,visibility .32s}
+ .admin-dashboard .admin-sidebar[data-open=true]{transform:translateX(0);opacity:1;visibility:visible;pointer-events:auto}
+ .admin-dashboard .admin-nav-backdrop{z-index:41;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility .28s}
+ .admin-dashboard .admin-nav-backdrop[data-open=true]{opacity:1;visibility:visible;pointer-events:auto}
+ .admin-dashboard .stat-grid>div{min-height:90px}
+}
+@media(max-width:600px){.admin-dashboard .stat-grid>div{padding:12px 13px;min-height:82px}.admin-dashboard .stat-grid strong{font-size:1.65rem}}
+@media(max-height:650px){.admin-dashboard .stat-grid>div{min-height:0;padding:10px}.admin-dashboard .stat-grid strong{font-size:1.5rem}}
+@media(prefers-reduced-motion:reduce){.admin-dashboard .admin-sidebar,.admin-dashboard .admin-nav-backdrop{transition:none}}
+
+.admin-dashboard .entry-editor :is(input,textarea,select)[aria-invalid=true]:not([type=checkbox]){border-color:#bf3e36;background:#fff7f5;box-shadow:0 0 0 2px #bf3e3620}
+.admin-dashboard .entry-editor :is(input,textarea,select)[aria-invalid=true]:focus-visible{outline:2px solid #bf3e36;outline-offset:2px}
+.admin-dashboard .entry-editor .field:has([aria-invalid=true])>span:first-child,.admin-dashboard .entry-editor .entry-localized-field:has([aria-invalid=true])>legend{color:#a52c27}
+.admin-dashboard .entry-editor .entry-field-error{display:block;color:#a52c27;font-size:.78rem;line-height:1.45;font-weight:600}
+.admin-dashboard .entry-editor .entry-check-field[data-invalid=true]{border:1px solid #bf3e36;background:#fff7f5;border-radius:10px;padding:12px}

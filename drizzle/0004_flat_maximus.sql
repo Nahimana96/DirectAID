@@ -1,0 +1,1 @@
+ALTER TABLE `projects` ADD `show_in_campaigns` integer DEFAULT 0 NOT NULL;

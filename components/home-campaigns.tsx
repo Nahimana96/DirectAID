@@ -1,9 +1,9 @@
 "use client";
 
 import { HeartHandshake, Droplets, Wheat, HandHeart, ArrowUpRight } from 'lucide-react';
-import { activeCampaigns, campaignDonationUrl } from '@/lib/campaigns';
+import { activeCampaignListings, campaignDonationUrl } from '@/lib/campaigns';
 import { textAt, type ContentEntry } from '@/lib/editorial-model';
-import { money, type Locale } from '@/lib/domain';
+import { money, type Locale, type Project } from '@/lib/domain';
 import { CardsSkeleton } from './cards-skeleton';
 import { StoryModal } from './story-modal';
 import { Progress } from './ui/progress';
@@ -15,11 +15,11 @@ const causes = {
   sacrifices: { icon: HandHeart, fr: 'Sacrifices', en: 'Sacrifices', ar: 'الأضاحي' },
 };
 
-export function HomeCampaigns({ entries, locale, loading, loadError }: {
-  entries: ContentEntry[]; locale: Locale; loading: boolean; loadError: boolean;
+export function HomeCampaigns({ entries, projects, locale, loading, loadError }: {
+  entries: ContentEntry[]; projects: Project[]; locale: Locale; loading: boolean; loadError: boolean;
 }) {
   const t = (fr: string, en: string, ar: string) => locale === 'en' ? en : locale === 'ar' ? ar : fr;
-  const campaigns = activeCampaigns(entries);
+  const campaigns = activeCampaignListings(entries, projects);
   return <section className="section home-campaigns" id="campagnes" aria-labelledby="home-campaigns-title">
     <header className="campaigns-heading">
       <p className="eyebrow">{t('ENSEMBLE, PASSONS À L’ACTION', 'TOGETHER, LET’S TAKE ACTION', 'معاً نحو العمل')}</p>

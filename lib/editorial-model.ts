@@ -35,10 +35,17 @@ export const initialProfile:AssociationProfile={
 };
 const day=z.string().refine(dateIsValid);
 export const entrySchema=z.object({id:z.string().uuid().optional(),kind:z.enum(['realisation','campaign']),title:localized,description:localized,cause:z.enum(['orphelins','puits','colis','sacrifices']),location:z.string().trim().max(200),date:z.union([day,z.literal('')]),start:z.union([day,z.literal('')]),end:z.union([day,z.literal('')]),goal:z.number().int().min(100).max(100000000),projectId:z.string().uuid().nullable(),images:z.array(asset).max(12),published:z.boolean(),imageConsent:z.boolean()}).strict().superRefine((v,c)=>{
- if(v.title.fr.length<2||v.description.fr.length<10)c.addIssue({code:'custom',message:'Ajoutez un titre et une présentation.'});
- if(v.images.length&&v.published&&!v.imageConsent)c.addIssue({code:'custom',message:'Confirmez le droit de publier les photos.'});
- if(v.kind==='realisation'&&(!v.date||v.date>today()||!v.location))c.addIssue({code:'custom',message:'Ajoutez une date et un lieu.'});
- if(v.kind==='campaign'&&(!v.start||!v.end||v.end<v.start))c.addIssue({code:'custom',message:'Vérifiez les dates de la campagne.'});
- if(v.kind==='campaign'&&v.cause==='puits'&&!v.projectId)c.addIssue({code:'custom',message:'Choisissez le projet de puits.'});
+ if(v.title.fr.length<2)c.addIssue({code:'custom',path:['title','fr'],message:'Le titre doit contenir au moins 2 caractères.'});
+ if(v.description.fr.length<10)c.addIssue({code:'custom',path:['description','fr'],message:'La présentation doit contenir au moins 10 caractères.'});
+ if(v.images.length&&v.published&&!v.imageConsent)c.addIssue({code:'custom',path:['imageConsent'],message:'Confirmez le droit de publier les photos.'});
+ if(v.kind==='realisation'){
+  if(!v.date||v.date>today())c.addIssue({code:'custom',path:['date'],message:'Choisissez une date de réalisation valide.'});
+  if(!v.location)c.addIssue({code:'custom',path:['location'],message:'Indiquez le lieu de réalisation.'});
+ }
+ if(v.kind==='campaign'){
+  if(!v.start)c.addIssue({code:'custom',path:['start'],message:'Choisissez une date de début.'});
+  if(!v.end||v.end<v.start)c.addIssue({code:'custom',path:['end'],message:'Choisissez une date de fin postérieure au début.'});
+  if(v.cause==='puits'&&!v.projectId)c.addIssue({code:'custom',path:['projectId'],message:'Choisissez un projet de puits publié.'});
+ }
 });
 export type ContentEntry=z.infer<typeof entrySchema> & {id:string;collected:number};

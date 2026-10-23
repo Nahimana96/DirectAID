@@ -1,0 +1,69 @@
+.water-page{background:#f6f8f4;overflow:hidden}
+.water-container{width:min(100% - 10%,1240px);margin-inline:auto}
+.water-hero{position:relative;isolation:isolate;min-height:min(700px,78svh);display:flex;align-items:center;color:#fff;background:var(--green)}
+.water-hero-image{position:absolute;inset:0;z-index:-2;background:url('/action-puits.webp') center 47%/cover no-repeat}
+.water-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,45,32,.92) 0%,rgba(4,45,32,.72) 41%,rgba(4,45,32,.15) 100%)}
+.water-hero-content{width:min(100% - 10%,1240px);margin:90px auto 110px;position:relative}
+.water-kicker{display:inline-flex;align-items:center;gap:10px;color:var(--yellow);font-size:.78rem;font-weight:750;letter-spacing:.19em;margin-bottom:28px}
+.water-hero h1{max-width:850px;font-size:clamp(3.15rem,7.4vw,7rem);line-height:1.05;letter-spacing:-.055em;text-wrap:balance}
+.water-hero h1 em{color:var(--yellow)}
+.water-hero-content>p{max-width:570px;margin-top:28px;color:#f1f5ed;font-size:clamp(1.03rem,1.7vw,1.24rem);line-height:1.68}
+.water-hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.water-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:52px;padding:12px 24px;border-radius:999px;font-size:.93rem;font-weight:750;line-height:1.3;text-align:center;transition:transform .2s,background .2s,color .2s}
+.water-button:hover{transform:translateY(-3px)}
+.water-button-yellow{background:var(--yellow);color:var(--green)}
+.water-button-yellow:hover{background:#ffe978}
+.water-button-outline{border:1px solid #ffffffa8;color:#fff;background:#ffffff12}
+.water-button-outline:hover{background:#fff;color:var(--green)}
+.water-button-green{background:var(--green);color:#fff}
+.water-button-green:hover{background:#186448}
+.water-hero-caption{position:absolute;inset:auto 5% 24px auto;color:#fff;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;border-inline-start:2px solid var(--yellow);padding-inline-start:13px}
+.water-intro{padding-block:105px 115px;text-align:center;scroll-margin-top:96px}
+.water-intro .eyebrow,.water-projects .eyebrow,.water-faq .eyebrow{color:#71805a}
+.water-intro h2,.water-section-heading h2,.water-faq h2{font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.13;letter-spacing:-.045em}
+.water-intro h2 em,.water-section-heading h2 em{color:#6e875c}
+.water-intro-lead{max-width:730px;margin:26px auto 0;color:#5c6f61;font-size:1.08rem;line-height:1.85}
+.water-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:58px;text-align:start}
+.water-benefits article{padding:32px;border:1px solid #dae5d6;border-radius:24px;background:#fff;box-shadow:0 10px 30px #104f3808}
+.water-benefits article>span{display:grid;place-items:center;width:52px;height:52px;margin-bottom:26px;border-radius:50%;background:#eef3e9;color:var(--green)}
+.water-benefits h3{font-size:1.45rem;margin-bottom:14px}
+.water-benefits p{font-size:.92rem;line-height:1.75;color:#637568}
+.water-projects{background:#eaf1ec;padding-block:100px 120px;scroll-margin-top:78px}
+.water-section-heading{display:flex;justify-content:space-between;align-items:end;gap:45px;margin-bottom:52px}
+.water-section-heading>p{max-width:360px;color:#5b7162;line-height:1.8}
+.water-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.water-project-card{min-width:0;background:#fff;border:1px solid #d9e3d8;border-radius:26px;overflow:hidden;box-shadow:0 14px 42px #104f3810}
+.water-project-photo{position:relative;aspect-ratio:1.75;overflow:hidden;background:#dce8db}
+.water-project-photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.water-project-card:hover .water-project-photo img{transform:scale(1.035)}
+.water-project-stage{position:absolute;inset:18px auto auto 18px;background:var(--yellow);color:var(--green);padding:7px 15px;border-radius:999px;font-weight:750;font-size:.76rem}
+.water-project-content{padding:28px;display:flex;flex-direction:column;align-items:start;gap:16px}
+.water-project-location{display:flex;align-items:center;gap:7px;color:#5d755f;font-size:.82rem;font-weight:650}
+.water-project-content h3{font-size:clamp(1.55rem,2.5vw,2rem);line-height:1.2}
+.water-project-funds{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-top:5px}
+.water-project-funds strong{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--green);font-weight:400}
+.water-project-funds span{font-size:.86rem;color:#637268}
+.water-project-content [data-slot=progress]{width:100%;height:9px;background:#e9eee7;border-radius:999px;margin-top:2px}
+.water-project-content [data-slot=progress-indicator]{background:var(--green)}
+.water-project-percent{font-size:.77rem;color:#6a786c;margin-top:-9px}
+.water-project-update{border-inline-start:2px solid #d1bd69;padding-inline-start:12px;font-size:.84rem;line-height:1.5;color:#566a5a}
+.water-project-update time{font-weight:700}
+.water-project-links{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;width:100%;margin-top:auto;padding-top:14px;border-top:1px solid #e8eee6}
+.water-project-links .water-button{min-height:44px;padding:10px 21px;font-size:.84rem}
+.water-project-complete{font-size:.85rem;font-weight:700;color:#58745b}
+.water-projects-empty{padding:55px 24px;background:#fff;border-radius:23px;text-align:center;display:grid;justify-items:center;gap:12px;color:#536d5b}
+.water-projects-empty svg{color:var(--green)}
+.water-projects-empty h3{color:var(--green)}
+.water-projects-empty p{max-width:520px}
+.water-faq{padding-block:90px 125px;max-width:920px;text-align:center}
+.water-faq h2{margin-bottom:38px}
+.water-faq-list{text-align:start;display:grid;gap:12px}
+.water-faq-list details{background:#fff;border:1px solid #dce5d8;border-radius:16px;padding:19px 22px}
+.water-faq-list summary{font-weight:700;color:var(--green);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.water-faq-list summary::-webkit-details-marker{display:none}
+.water-faq-list summary::after{content:'+';font-size:1.5rem;font-weight:400;line-height:1}
+.water-faq-list details[open] summary::after{content:'−'}
+.water-faq-list details p{color:#5f7162;font-size:.92rem;line-height:1.75;padding-top:15px;max-width:730px}
+@media(max-width:800px){.water-container{width:min(100% - 8%,1240px)}.water-hero-content{width:92%}.water-benefits,.water-project-grid{grid-template-columns:1fr;gap:14px}.water-benefits article{padding:24px}.water-benefits article>span{margin-bottom:15px}.water-section-heading{display:block}.water-section-heading>p{margin-top:20px;max-width:600px}.water-projects{padding-block:80px}}
+@media(max-width:650px){.water-hero{min-height:650px;align-items:end}.water-hero::before{background:linear-gradient(0deg,rgba(4,45,32,.95),rgba(4,45,32,.58) 65%,rgba(4,45,32,.08))}.water-hero-image{background-position:58% center}.water-hero-content{margin:150px auto 74px}.water-hero h1{font-size:clamp(2.8rem,11vw,4.7rem)}.water-hero-content>p{font-size:1rem;margin-top:22px}.water-hero-actions{gap:10px}.water-button{width:100%}.water-hero-caption{display:none}.water-intro{padding-block:72px 82px}.water-intro-lead{font-size:.98rem}.water-benefits{margin-top:34px}.water-project-grid{grid-template-columns:1fr}.water-project-content{padding:22px}.water-project-links .water-button{width:auto}.water-faq{padding-block:70px 85px}}
+@media(prefers-reduced-motion:reduce){.water-button,.water-project-photo img{transition:none}}
