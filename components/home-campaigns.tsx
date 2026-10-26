@@ -42,7 +42,7 @@ export function HomeCampaigns({ entries, projects, locale, loading, loadError }:
               <Progress value={Math.min(100, entry.collected / entry.goal * 100)} aria-label={t('Avancement de la collecte', 'Fundraising progress', 'تقدم جمع التبرعات')} />
               <p><strong>{money(entry.collected, locale)}</strong> / {money(entry.goal, locale)}</p>
             </div>
-            <StoryModal title={title} description={description} image={image} locale={locale} />
+            <StoryModal title={title} description={description} image={image} images={entry.images.map(id=>'/api/media/'+id)} locale={locale} />
             <a className="button green campaign-donate" href={campaignDonationUrl(entry, locale)}>{t('Faire un don', 'Donate', 'تبرّع')}<ArrowUpRight size={18} aria-hidden="true" /></a>
           </div>
         </article>;
