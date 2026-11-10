@@ -1,6 +1,6 @@
 "use client";
 
-import {Droplets, Plus} from 'lucide-react';
+import {Droplets, Plus, Trash2} from 'lucide-react';
 import {money, type Project} from '@/lib/domain';
 import {Button} from './ui/button';
 
@@ -20,7 +20,7 @@ export function AdminProjects({projects, busy, onCreate, onEdit, onDelete}: {
         <h3>{project.title}</h3>
         <p>{project.location} · {money(project.collected)} reçus / {money(project.goal)}</p>
         <p className="fineprint">{project.show_in_campaigns ? 'Affiché dans Nos campagnes' : 'Absent de Nos campagnes'}</p>
-        <div className="admin-project-actions"><Button variant="outline" onClick={() => onEdit(project)}>Modifier</Button><Button variant="outline" disabled={busy} onClick={() => onDelete(project)}>Supprimer</Button></div>
+        <div className="admin-project-actions"><Button variant="outline" onClick={() => onEdit(project)}>Modifier</Button><Button variant="outline" className="admin-delete" disabled={busy} onClick={() => onDelete(project)}><Trash2 size={16} aria-hidden="true"/>Supprimer</Button></div>
         {project.published && <a className="text-link" href={`/actions/puits?lang=fr#puits-projets`} target="_blank" rel="noreferrer">Voir les puits publiés</a>}
       </div>
     </article>)}</div> : <div className="admin-panel empty-state"><Droplets aria-hidden="true"/><h3>Votre premier puits</h3><p>Créez une fiche avec son objectif, son lieu et sa photo.</p></div>}
