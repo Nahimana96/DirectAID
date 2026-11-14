@@ -1,3 +1,19 @@
-import {notFound} from 'next/navigation';
+import { notFound } from 'next/navigation';
 import PublicSite from '@/components/public-site';
-export default async function Page({params}:{params:Promise<{page:string[]}>}){const p=await params;if(p.page.length>1&&['realisations','campagnes'].includes(p.page[0]))notFound();return <PublicSite path={p.page.join('/')}/>;}
+import { indexablePaths, pageMetadata } from '@/lib/seo';
+
+const privatePaths = ['espace-donateur', 'suivi', 'merci'];
+
+type Props = { params: Promise<{ page: string[] }> };
+
+export async function generateMetadata({ params }: Props) {
+  const { page } = await params;
+  return pageMetadata(page.join('/'));
+}
+
+export default async function Page({ params }: Props) {
+  const { page } = await params;
+  const path = page.join('/');
+  if (!indexablePaths.includes(path) && !privatePaths.includes(path)) notFound();
+  return <PublicSite path={path} />;
+}

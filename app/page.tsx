@@ -1,2 +1,8 @@
 import PublicSite from '@/components/public-site';
-export default function Home(){return <PublicSite/>;}
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata('');
+
+export default function Home() {
+  return <PublicSite />;
+}
