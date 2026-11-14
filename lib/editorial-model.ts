@@ -6,7 +6,7 @@ export type Localized = z.infer<typeof localized>;
 export const textAt = (value:Localized, locale:Locale) => value[locale] || value.fr;
 export const words = (fr='',en='',ar=''):Localized => ({fr,en,ar});
 export const initialPartners=[
- {name:words('Gouvernement des Émirats Arabes Unis','Government of the United Arab Emirates','حكومة دولة الإمارات العربية المتحدة'),description:words('Soutien institutionnel aux programmes humanitaires et aux projets d’eau potable.','Institutional support for humanitarian programmes and drinking water projects.','دعم مؤسسي للبرامج الإنسانية ومشاريع مياه الشرب.')},
+ {name:words('Qatar Charity','Qatar Charity','قطر الخيرية'),description:words('Soutien institutionnel aux programmes humanitaires et aux projets d’eau potable.','Institutional support for humanitarian programmes and drinking water projects.','دعم مؤسسي للبرامج الإنسانية ومشاريع مياه الشرب.')},
  {name:words('Gouvernement du Burundi','Government of Burundi','حكومة بوروندي'),description:words('Agrément officiel et collaboration avec les autorités locales pour nos centres et écoles.','Official recognition and collaboration with local authorities for our centres and schools.','اعتماد رسمي وتعاون مع السلطات المحلية لمراكزنا ومدارسنا.')},
  {name:words('Communauté Islamique du Burundi','Islamic Community of Burundi','الجالية الإسلامية في بوروندي'),description:words('Ancrage religieux et communautaire, supervision de nos actions selon l’éthique islamique.','Religious and community ties, with supervision of our work according to Islamic ethics.','روابط دينية ومجتمعية وإشراف على أعمالنا وفق الأخلاق الإسلامية.')},
 ];

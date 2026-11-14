@@ -67,7 +67,7 @@
 .home-hero .carousel-arrow:hover,.home-hero .carousel-play:hover{background:var(--yellow);color:var(--green)}
 @keyframes hero-reveal{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
 @keyframes hero-copy-reveal{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-.testimonials-section{background:#f7f3ea;max-width:none}
+.testimonials-section{background:var(--home-section-bg, #f7f3ea);max-width:none}
 .testimonials-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .testimonial-card{margin:0;padding:32px;background:#fff;border:1px solid #e1e5d8;border-radius:18px;display:flex;flex-direction:column;gap:28px}
 .testimonial-card>svg{color:#b89942}

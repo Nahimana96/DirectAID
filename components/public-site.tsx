@@ -8,8 +8,8 @@ import {DonorArea} from './donor-area';
 import {initialProfile,textAt,type AssociationProfile,type ContentEntry} from '@/lib/editorial-model';
 import { flushSync } from 'react-dom';
 import { Testimonials,DonorFeedback } from './testimonials';
-import { createContext,useContext,useEffect,useRef,useState,type ReactNode,type FormEvent } from 'react';
-import { HeartHandshake,Droplets,Wheat,HandHeart,Mail,Phone,CheckCircle2,ShieldCheck,LockKeyhole,Menu } from 'lucide-react';
+import { createContext,useContext,useEffect,useId,useRef,useState,type ReactNode,type FormEvent } from 'react';
+import { HeartHandshake,Droplets,Wheat,HandHeart,Mail,Phone,CheckCircle2,ShieldCheck,LockKeyhole,Menu,ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -30,23 +30,55 @@ function useT(){const l=useContext(Language);return (fr:string,en:string,ar:stri
 export function Field({label,children}:{label:string;children:ReactNode}){return <label className="field"><span>{label}</span>{children}</label>;}
 export async function api(path:string,body?:unknown){const res=await fetch('/api/'+path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined});const data:any=await res.json();if(!res.ok)throw new Error(data.error||'ERROR');return data;}
 export function humanError(code:string){const map:Record<string,string>={CAMPAIGN_UNAVAILABLE:'Cette campagne est indisponible. Revenez à la liste des campagnes.',CAMPAIGN_HAS_DONATIONS:'Cette campagne a reçu des contributions : elle ne peut plus être supprimée ni changer de cause ou de puits.',PROJECT_HAS_DONATIONS:'Ce puits a reçu des contributions : il ne peut pas être supprimé.',PROJECT_HAS_CAMPAIGNS:'Ce puits est lié à une campagne. Supprimez cette campagne avant le puits.',INVALID_ASSET:'Ce fichier n’est pas disponible pour cette publication.',INVALID_CURRENT_PASSWORD:'Le mot de passe actuel est incorrect.',INVALID_PASSWORD:'Choisissez un nouveau mot de passe et confirmez-le.',TOO_MANY_ATTEMPTS:'Trop de tentatives. Réessayez dans 15 minutes.',UNAUTHENTICATED:'Connectez-vous pour accéder à l’administration.',FORBIDDEN:'Vous ne disposez pas de cet accès.',INVALID_FORM:'Vérifiez les champs du formulaire.',INVALID_AMOUNT:'Indiquez un montant compris entre 1 € et 100 000 €.',MAX_SEVEN_SHARES:'Une commande peut contenir 7 parts de vache au maximum.',RECIPIENTS_REQUIRED:'Renseignez un nom pour chaque sacrifice.',INVALID_DATE:'Indiquez une date souhaitée valide, à partir d’aujourd’hui.',PROJECT_UNAVAILABLE:'Choisissez un projet de puits disponible.',FULL_ALREADY_STARTED:'Ce puits reçoit déjà des participations. Vous pouvez contribuer à sa collecte.',PROJECT_FUNDED:'Ce puits a déjà atteint son objectif.',STRIPE_NOT_CONFIGURED:'Le paiement par carte sera disponible prochainement.',BANK_NOT_CONFIGURED:'Les coordonnées bancaires seront communiquées prochainement.',PRICES_NOT_CONFIGURED:'Les montants doivent être confirmés par l’association.',PAYMENT_REQUIRED:'Cette action nécessite un paiement confirmé.',FILE_SIZE:'Choisissez une image de moins de 4 Mo.',IMAGE_ONLY:'Choisissez un fichier JPG, PNG ou WebP.',INVALID_STATUS:'Le statut de ce don a changé. Actualisez la page.'};return map[code]||'Une erreur est survenue. Vérifiez votre saisie et réessayez.';}
-const names:Record<Cause,[string,string,string]>={orphelins:['Les orphelins','Orphan support','رعاية الأيتام'],puits:['Les puits d’eau','Water wells','آبار المياه'],colis:['Les colis alimentaires','Food parcels','الطرود الغذائية'],sacrifices:['Les sacrifices','Sacrifices','الأضاحي']};
+const names:Record<Cause,[string,string,string]>={orphelins:['Les orphelins','Orphan support','رعاية الأيتام'],puits:['Les puits d’eau','Water wells','آبار المياه'],colis:['Les colis alimentaires','Food parcels','الطرود الغذائية'],sacrifices:['Qurban (sacrifice)','Qurban (sacrifice)','الأضاحي']};
 const descriptions:Record<Cause,[string,string,string]>={orphelins:['Soutenez un programme collectif pour répondre aux besoins des enfants : repas, éducation et soins, selon les priorités de l’association.','Support a collective programme for children’s food, education and care, according to the association’s priorities.','ساهم في برنامج جماعي لتوفير الغذاء والتعليم والرعاية للأطفال حسب أولويات الجمعية.'],puits:['Contribuez à un projet identifié ou financez un puits entier. Suivez les fonds reçus et l’avancement des travaux.','Contribute to an identified project or fund an entire well. Follow funds received and construction progress.','ساهم في مشروع محدد أو موّل بئراً كاملاً وتابع التبرعات المستلمة وتقدم الأعمال.'],colis:['Offrez des colis de denrées essentielles aux familles, ou contribuez librement aux prochaines distributions.','Offer food parcels to families or make a contribution towards upcoming distributions.','قدّم طروداً غذائية للأسر أو ساهم بمبلغ اختياري في التوزيعات المقبلة.'],sacrifices:['Un mouton, une part de vache ou une vache entière : confiez votre sacrifice à notre équipe au Burundi, toute l’année.','A sheep, a share of a cow or a whole cow: entrust your sacrifice to our team in Burundi, throughout the year.','خروف أو حصة من بقرة أو بقرة كاملة: وكّل فريقنا في بوروندي طوال العام.']};
 const icons={orphelins:HeartHandshake,puits:Droplets,colis:Wheat,sacrifices:HandHeart};
 export type PublicData={profile?:AssociationProfile;entries?:ContentEntry[];settings:Settings;projects:Project[];demo:boolean;stripeReady:boolean;emailReady:boolean;testimonials?:import('./testimonials').Testimonial[]};
+function ActionsMenu({onNavigate}:{onNavigate?:()=>void}){
+ const locale=useContext(Language),t=useT();
+ const [open,setOpen]=useState(false);
+ const id=useId();
+ const trigger=useRef<HTMLButtonElement>(null);
+ return (
+  <div className="actions-menu" data-open={open}
+   onPointerEnter={event=>{if(!onNavigate && event.pointerType==='mouse')setOpen(true);}}
+   onPointerLeave={event=>{
+    if(!onNavigate && event.pointerType==='mouse')setOpen(false);
+   }}
+   onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setOpen(false);}}
+   onKeyDown={event=>{
+    if(event.key==='Escape' && open){
+     event.stopPropagation();
+     setOpen(false);
+     trigger.current?.focus();
+    }
+   }}>
+   <button ref={trigger} className="actions-menu-trigger" type="button" aria-expanded={open} aria-controls={id} onClick={()=>setOpen(value=>!value)}>
+    {t('Actions','Causes','أعمالنا')}<ChevronDown size={15} aria-hidden="true"/>
+   </button>
+   <div id={id} className="actions-menu-panel" inert={!open}>
+    <div className="actions-menu-items">
+     {(Object.keys(names) as Cause[]).map(cause=>(
+      <a key={cause} href={'/actions/'+cause+'?lang='+locale} onClick={onNavigate}>{t(...names[cause])}</a>
+     ))}
+    </div>
+   </div>
+  </div>
+ );
+}
 function Header(){
  const t=useT(),l=useContext(Language),changeLanguage=useContext(LanguageChange);
  const [menuOpen,setMenuOpen]=useState(false),[scrolled,setScrolled]=useState(false);
  useEffect(()=>{const update=()=>setScrolled(window.scrollY>24);update();window.addEventListener('scroll',update,{passive:true});return()=>window.removeEventListener('scroll',update);},[]);
- const links=[['/#actions',t('Actions','Causes','أعمالنا')],['/realisations',t('Réalisations','Achievements','إنجازاتنا')],['/association',t('À propos','About us','من نحن')],['/contact',t('Contact','Contact','اتصل بنا')]];
- const href=(url:string)=>url.includes('#')?`/?lang=${l}#actions`:url+'?lang='+l;
+ const links=[['/realisations',t('Réalisations','Achievements','إنجازاتنا')],['/association',t('À propos','About us','من نحن')],['/contact',t('Contact','Contact','اتصل بنا')]];
+ const href=(url:string)=>url+'?lang='+l;
  return <header className={'site-header'+(scrolled?' is-scrolled':'')}>
   <a className="brand" href={'/?lang='+l}><img src="/logo-directaid.jpeg" alt=""/><span>Direct Aid<small>BURUNDI</small></span></a>
-  <nav className="desktop-links" aria-label={t('Navigation principale','Main navigation','القائمة الرئيسية')}>{links.map(([url,label])=><a key={url} href={href(url)}>{label}</a>)}</nav>
+  <nav className="desktop-links" aria-label={t('Navigation principale','Main navigation','القائمة الرئيسية')}><ActionsMenu/>{links.map(([url,label])=><a key={url} href={href(url)}>{label}</a>)}</nav>
   <div className="header-tools">
    <Select value={l} onValueChange={value=>changeLanguage(value as Locale)}><SelectTrigger aria-label={t('Langue','Language','اللغة')} className="language-select"><SelectValue>{l==='ar'?'عربي':l.toUpperCase()}</SelectValue></SelectTrigger><SelectContent className="language-menu" position="popper" align="end"><SelectItem value="fr">Français</SelectItem><SelectItem value="en">English</SelectItem><SelectItem value="ar">العربية</SelectItem></SelectContent></Select>
    <Button asChild className="button yellow header-donate"><a href={'/donner?lang='+l}>{t('Faire un don','Donate','تبرّع')}</a></Button>
-   <Sheet open={menuOpen} onOpenChange={setMenuOpen}><SheetTrigger asChild><Button variant="ghost" className="mobile-menu" aria-label={t('Menu','Menu','القائمة')}><Menu/></Button></SheetTrigger><SheetContent className="mobile-navigation"><SheetTitle>Direct Aid <span>Burundi</span></SheetTitle><nav className="mobile-links">{links.map(([url,label])=><a key={url} onClick={()=>setMenuOpen(false)} href={href(url)}>{label}</a>)}<a className="mobile-donate" href={'/donner?lang='+l}>{t('Faire un don','Donate','تبرّع')}</a></nav></SheetContent></Sheet>
+   <Sheet open={menuOpen} onOpenChange={setMenuOpen}><SheetTrigger asChild><Button variant="ghost" className="mobile-menu" aria-label={t('Menu','Menu','القائمة')}><Menu/></Button></SheetTrigger><SheetContent className="mobile-navigation"><SheetTitle>Direct Aid <span>Burundi</span></SheetTitle><nav className="mobile-links"><ActionsMenu onNavigate={()=>setMenuOpen(false)}/>{links.map(([url,label])=><a key={url} onClick={()=>setMenuOpen(false)} href={href(url)}>{label}</a>)}<a className="mobile-donate" href={'/donner?lang='+l}>{t('Faire un don','Donate','تبرّع')}</a></nav></SheetContent></Sheet>
   </div>
  </header>;
 }

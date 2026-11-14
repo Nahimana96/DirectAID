@@ -89,3 +89,133 @@
 [data-slot=input][type=file]:focus-visible::file-selector-button{outline:2px solid var(--green);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){[data-slot=input][type=file]::file-selector-button{transition:none;transform:none!important}}
 textarea[data-slot=textarea]{field-sizing:fixed;height:128px;min-height:128px;max-height:128px;resize:none;overflow-y:auto;overscroll-behavior:contain}
+
+.trust-mark {
+  display: grid;
+  place-items: center;
+  min-height: 116px;
+  margin-bottom: 24px;
+}
+
+.trust-mark .trust-icon {
+  margin: 0;
+}
+
+.trust-logo {
+  display: grid;
+  place-items: center;
+  width: min(100%, 148px);
+  height: 116px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #f0f4e8;
+}
+
+.trust-logo img {
+  width: 100%;
+  height: 88px;
+  object-fit: contain;
+}
+
+.actions-menu {
+  position: relative;
+}
+
+.actions-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.actions-menu-trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.actions-menu-trigger svg {
+  transition: transform 220ms ease;
+}
+
+.actions-menu[data-open="true"] .actions-menu-trigger svg {
+  transform: rotate(180deg);
+}
+
+.actions-menu-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: grid-template-rows 240ms ease, opacity 200ms ease, transform 240ms ease;
+}
+
+.actions-menu[data-open="true"] .actions-menu-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.actions-menu-items {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.actions-menu-items a {
+  display: block;
+}
+
+.desktop-links .actions-menu-panel {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 100%;
+  inset-inline-start: -12px;
+  width: max-content;
+  max-width: 80vw;
+  border-radius: 12px;
+  background: var(--green);
+  color: white;
+  box-shadow: 0 10px 24px #082b2440;
+}
+
+.desktop-links .actions-menu-items a {
+  padding: 11px 16px;
+  white-space: normal;
+}
+
+.actions-menu-items a:hover {
+  color: var(--yellow);
+}
+
+.mobile-navigation {
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
+.mobile-navigation > .mobile-links {
+  flex-shrink: 0;
+}
+
+.mobile-links .actions-menu-trigger {
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid #ffffff26;
+}
+
+.mobile-links .actions-menu-items a {
+  padding: 12px 16px;
+  font-size: 0.95em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actions-menu-panel,
+  .actions-menu-trigger svg {
+    transition: none;
+  }
+}
+
+.actions-menu-items a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -3px;
+}
