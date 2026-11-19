@@ -4,6 +4,7 @@ import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {createCipheriv,randomBytes,randomUUID,createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import path from 'node:path';
+import {pruneBackups} from './backup-retention.mjs';
 
 // Run on a trusted machine or the daily GitHub workflow, outside Vercel's request limit.
 const env=process.env,local=process.argv.includes('--local');
@@ -16,7 +17,7 @@ const client=createClient({url:env.TURSO_DATABASE_URL,authToken:env.TURSO_AUTH_T
 const sha=value=>createHash('sha256').update(value).digest('hex');
 function encrypt(value){const iv=randomBytes(12),cipher=createCipheriv('aes-256-gcm',key,iv);const body=Buffer.concat([cipher.update(gzipSync(value)),cipher.final()]);return Buffer.concat([Buffer.from('DAID1'),iv,cipher.getAuthTag(),body]);}
 async function store(name,bytes){if(local){await mkdir(path.dirname(path.join(output,name)),{recursive:true});await writeFile(path.join(output,name),bytes,{flag:'wx'});}else await put(`${prefix}/${name}`,bytes,{access:'private',addRandomSuffix:false,contentType:'application/octet-stream',token:env.BACKUP_BLOB_READ_WRITE_TOKEN});}
-let tracked=false;
+let tracked=false,completed=false;
 try{
  await client.execute({sql:"INSERT INTO backup_runs(id,status,created_at) VALUES (?,'running',?)",args:[id,new Date().toISOString()]});tracked=true;
  const tx=await client.transaction('read');let snapshot;
@@ -32,5 +33,7 @@ try{
  // The manifest is written last: its presence means the complete archive is ready.
  await store('manifest.json',Buffer.from(JSON.stringify(manifest,null,2)));
  await client.execute({sql:"UPDATE backup_runs SET status='complete',asset_count=?,completed_at=? WHERE id=?",args:[manifest.files.length,new Date().toISOString(),id]});
+ completed=true;
+ if(!local){const retention=await pruneBackups(env.BACKUP_BLOB_READ_WRITE_TOKEN);console.log('Anciennes sauvegardes supprimées : '+retention.removedArchives+' ; sauvegardes conservées : '+retention.retained.length);}
  console.log(`Sauvegarde chiffrée terminée : ${manifest.files.length} fichier(s). ${local?output:prefix}`);
-}catch(e){if(tracked)await client.execute({sql:"UPDATE backup_runs SET status='failed',completed_at=? WHERE id=?",args:[new Date().toISOString(),id]}).catch(()=>{});throw e;}finally{client.close();}
+}catch(e){if(tracked&&!completed)await client.execute({sql:"UPDATE backup_runs SET status='failed',completed_at=? WHERE id=?",args:[new Date().toISOString(),id]}).catch(()=>{});throw e;}finally{client.close();}
