@@ -20,9 +20,9 @@ const campaigns = [
   },
   {
     cause: 'colis',
-    fr: ['PARTAGER L’ESSENTIEL', 'Un colis.', 'Des repas à partager.', 'Riz, farine, huile… Un colis alimentaire apporte un soutien concret aux familles qui en ont besoin.', 'Offrir un colis alimentaire'],
-    en: ['SHARING THE ESSENTIALS', 'A food parcel.', 'Meals to share.', 'Rice, flour, oil… A food parcel provides practical support for families who need it.', 'Give a food parcel'],
-    ar: ['نتقاسم الأساسيات', 'طرد غذائي.', 'ووجبات نتقاسمها.', 'أرز ودقيق وزيت… طرد غذائي يقدّم دعماً ملموساً للأسر المحتاجة.', 'قدّم طرداً غذائياً'],
+    fr: ['PARTAGER L’ESSENTIEL', 'L’essentiel.', 'À partager.', 'Alimentation, vêtements, chaussures et uniformes : ensemble, répondons aux besoins des familles et des enfants au Burundi.', 'Soutenir cette action'],
+    en: ['SHARING THE ESSENTIALS', 'The essentials.', 'To share.', 'Food, clothing, shoes and school uniforms: together, support families and children in Burundi.', 'Support this cause'],
+    ar: ['نتقاسم الأساسيات', 'الاحتياجات الأساسية.', 'نتقاسمها معاً.', 'الغذاء والملابس والأحذية والزي المدرسي: معاً ندعم الأسر والأطفال في بوروندي.', 'ادعم هذا العمل'],
   },
   {
     cause: 'sacrifices',

@@ -1,0 +1,42 @@
+/* One shared shape for public, admin and portalled form controls. */
+:root {
+  --control-radius: 999px;
+}
+
+:is(
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="hidden"]),
+  textarea,
+  select,
+  [data-slot="select-trigger"],
+  [data-slot="combobox-trigger"],
+  button:not(.admin-entry-preview, .editor-photo-drag),
+  [data-slot="button"],
+  .button,
+  .water-button,
+  .choice,
+  .full-tabs
+) {
+  border-radius: var(--control-radius) !important;
+}
+
+input::file-selector-button {
+  border-radius: var(--control-radius) !important;
+}
+
+/* Keep text clear of the curved ends, including longer options and messages. */
+:is(.public-shell, .admin-app, .order-sheet, .review-dialog) :is(
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="hidden"]),
+  select,
+  [data-slot="select-trigger"],
+  [data-slot="combobox-trigger"]
+) {
+  padding-inline: 18px;
+}
+
+textarea[data-slot="textarea"] {
+  padding: 18px 26px;
+}
+
+:is(.public-shell, .admin-app) .choice {
+  padding-inline: 18px;
+}

@@ -1,12 +1,12 @@
 "use client";
 
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useState, type ReactElement} from 'react';
 import {X, ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play} from 'lucide-react';
 import {Carousel, CarouselContent, CarouselItem, type CarouselApi} from './ui/carousel';
 import {Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose} from './ui/dialog';
 import type {Locale} from '@/lib/domain';
 
-export function StoryModal({title, description, image, images, locale}: {title: string; description: string; image: string; images?: string[]; locale: Locale}) {
+export function StoryModal({title, description, image, images, locale, trigger}: {title: string; description: string; image: string; images?: string[]; locale: Locale; trigger?: ReactElement}) {
  const [open, setOpen] = useState(false);
  const [api, setApi] = useState<CarouselApi>();
  const [selected, setSelected] = useState(0);
@@ -49,7 +49,7 @@ export function StoryModal({title, description, image, images, locale}: {title: 
  };
 
  return <Dialog open={open} onOpenChange={value => {setOpen(value); if (value) {setSelected(0); setPlaying(true);}}}>
-  <DialogTrigger asChild><button type="button" className="story-modal-trigger">{t('Voir les détails', 'View details', 'عرض التفاصيل')}<ArrowUpRight size={18} aria-hidden="true"/></button></DialogTrigger>
+  <DialogTrigger asChild>{trigger || <button type="button" className="story-modal-trigger">{t('Voir les détails', 'View details', 'عرض التفاصيل')}<ArrowUpRight size={18} aria-hidden="true"/></button>}</DialogTrigger>
   <DialogContent className="story-modal" showCloseButton={false} dir={locale === 'ar' ? 'rtl' : 'ltr'} lang={locale}>
    <div className="story-modal-media">
     <Carousel opts={carouselOptions} setApi={setApi} className="story-modal-carousel" aria-label={t('Photos de la réalisation', 'Achievement photos', 'صور الإنجاز')}>

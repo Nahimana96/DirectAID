@@ -1,0 +1,31 @@
+.admin-dashboard .admin-entries-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;align-items:start}
+.admin-dashboard .admin-entry-card{position:relative;isolation:isolate;max-width:310px;width:100%;border-radius:16px;overflow:hidden}
+.admin-dashboard .admin-entry-card .story-cover{height:150px;display:block}
+.admin-dashboard .admin-entry-card .story-body{padding:16px;gap:12px}
+.admin-dashboard .admin-entry-card h3{font-size:1rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.admin-dashboard .admin-entry-card .story-body>p{font-size:.76rem;line-height:1.6}
+.admin-dashboard .admin-entry-card .badge{font-size:.68rem;padding:4px 8px}
+.admin-entry-preview{position:absolute;inset:0;z-index:1;cursor:pointer;border:0;border-radius:inherit;background:transparent}
+.admin-entry-preview:focus-visible{outline:3px solid var(--green);outline-offset:-4px}
+.admin-entry-card .admin-entry-actions{position:relative;z-index:2;gap:8px;margin-top:2px}
+.admin-dashboard .admin-entry-card .admin-entry-actions [data-slot=button]{font-size:.75rem;min-height:36px;padding:8px 10px}
+.photo-order-editor{min-width:0;display:grid;gap:12px}
+.editor-photo{min-width:0;border:1px solid #d5dfd3;border-radius:12px;background:#fff;padding:5px;transition:box-shadow .2s,border-color .2s}
+.editor-photo.is-dragging{border-color:var(--green);box-shadow:0 0 0 3px #104f3828}
+.editor-photo.is-dragging .editor-photo-drag img{opacity:.4}
+.editor-photo.is-drop-target{border-color:var(--green);box-shadow:0 0 0 3px #104f3840;background:#e8f0e3}
+.editor-photo-floating{position:fixed;z-index:100;pointer-events:none;aspect-ratio:4/3;object-fit:cover;max-width:240px;border-radius:10px;opacity:.9;box-shadow:0 12px 35px #092a2540;transform:translate(-50%,-50%) rotate(-2deg)}
+.editor-photo-drag{position:relative;display:block;width:100%;padding:0;border-radius:8px;overflow:hidden;cursor:grab;touch-action:none;user-select:none}
+.editor-photo-drag:active{cursor:grabbing}
+.editor-photo-drag:focus-visible,.editor-photo-actions button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.editor-photo-drag img{display:block;pointer-events:none}
+.editor-photo-position{position:absolute;inset:8px auto auto 8px;padding:4px 8px;background:#fffef2eb;color:#104f38;border-radius:6px;font-size:.68rem;font-weight:600;pointer-events:none}
+.editor-photo-grip{position:absolute;right:8px;top:8px;padding:3px;box-sizing:content-box;background:#fffef2eb;color:#104f38;border-radius:5px;pointer-events:none}
+.editor-photo-actions{display:flex;align-items:center;gap:4px;padding-top:5px}
+.editor-photo-actions button{min-width:32px;min-height:34px;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:7px;color:#104f38;font-size:.75rem}
+.editor-photo-actions button:hover:not(:disabled){background:#eef4eb}
+.editor-photo-actions button:disabled{opacity:.3;cursor:not-allowed}
+.editor-photo-actions .editor-photo-remove{margin-inline-start:auto;padding-inline:7px;color:#9a3731}
+@media(max-width:600px){.admin-dashboard .admin-entries-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.admin-dashboard .admin-entry-card{max-width:none}.admin-dashboard .admin-entry-card .story-cover{height:120px}.admin-dashboard .admin-entry-card .story-body{padding:12px;gap:10px}.admin-dashboard .admin-entry-card h3{font-size:.88rem}.admin-dashboard .admin-entry-card .admin-entry-actions [data-slot=button]{padding:7px 8px;font-size:.7rem;min-height:34px}}
+@media(max-width:400px){.admin-dashboard .admin-entries-grid{grid-template-columns:1fr}.admin-dashboard .admin-entry-card{max-width:310px}.admin-dashboard .admin-entry-card .story-cover{height:150px}}
+@media(prefers-reduced-motion:reduce){.editor-photo{transition:none}}

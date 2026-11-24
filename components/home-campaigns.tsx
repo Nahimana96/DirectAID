@@ -1,6 +1,6 @@
 "use client";
 
-import { HeartHandshake, Droplets, Wheat, HandHeart, ArrowUpRight } from 'lucide-react';
+import { HeartHandshake, Droplets, PackageOpen, HandHeart, ArrowUpRight } from 'lucide-react';
 import { activeCampaignListings, campaignDonationUrl } from '@/lib/campaigns';
 import { textAt, type ContentEntry } from '@/lib/editorial-model';
 import { money, type Locale, type Project } from '@/lib/domain';
@@ -11,7 +11,7 @@ import { Progress } from './ui/progress';
 const causes = {
   orphelins: { icon: HeartHandshake, fr: 'Orphelins', en: 'Orphan support', ar: 'رعاية الأيتام' },
   puits: { icon: Droplets, fr: 'Eau potable', en: 'Clean water', ar: 'مياه الشرب' },
-  colis: { icon: Wheat, fr: 'Aide alimentaire', en: 'Food support', ar: 'مساعدة غذائية' },
+  colis: { icon: PackageOpen, fr: 'Aide alimentaire et matérielle', en: 'Food and material aid', ar: 'المساعدات الغذائية والعينية' },
   sacrifices: { icon: HandHeart, fr: 'Sacrifices', en: 'Sacrifices', ar: 'الأضاحي' },
 };
 

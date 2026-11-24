@@ -5,7 +5,7 @@ import type {Cause,Locale} from '@/lib/domain';
 const visualCopy:Record<Cause,[string,string,string]>={
  orphelins:['Grandir avec du soutien.','Growing with support.','النمو بدعمكم.'],
  puits:['Rapprocher l’eau des familles.','Bringing water closer to families.','تقريب المياه من العائلات.'],
- colis:['Un colis, un geste concret.','A food parcel, a tangible act.','طرد غذائي، وعمل ملموس.'],
+ colis:['Partager l’essentiel.','Sharing the essentials.','نتقاسم الأساسيات.'],
  sacrifices:['Partager avec les familles.','Sharing with families.','المشاركة مع العائلات.'],
 };
 

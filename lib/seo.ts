@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 export const siteUrl = 'https://www.directaidburundi.org';
 
 const pages = {
-  '': ['Direct Aid Burundi — Aide humanitaire au Burundi', 'Soutenez les actions de Direct Aid Burundi : aide aux enfants orphelins, accès à l’eau potable, colis alimentaires et sacrifices solidaires.'],
+  '': ['Direct Aid Burundi — Aide humanitaire au Burundi', 'Soutenez les actions de Direct Aid Burundi : aide aux enfants orphelins, accès à l’eau potable, aide alimentaire et matérielle, et Qurban (sacrifice).'],
   association: ['Notre association', 'Découvrez la mission et les actions de Direct Aid Burundi auprès des enfants et des familles au Burundi.'],
   campagnes: ['Campagnes de solidarité au Burundi', 'Consultez les campagnes de Direct Aid Burundi et choisissez le projet que vous souhaitez soutenir.'],
   realisations: ['Nos réalisations au Burundi', 'Découvrez les actions réalisées par Direct Aid Burundi et les photos des projets menés sur le terrain.'],
   donner: ['Faire un don pour le Burundi', 'Soutenez les actions de Direct Aid Burundi avec un don ponctuel ou mensuel.'],
   'actions/orphelins': ['Soutenir les enfants orphelins au Burundi', 'Contribuez à un programme collectif qui soutient l’alimentation, l’éducation et les soins des enfants orphelins au Burundi.'],
   'actions/puits': ['Financer un puits d’eau potable au Burundi', 'Découvrez les projets de puits de Direct Aid Burundi et contribuez à l’accès à l’eau potable.'],
-  'actions/colis': ['Offrir un colis alimentaire au Burundi', 'Soutenez la distribution de colis alimentaires aux familles au Burundi avec Direct Aid Burundi.'],
+  'actions/colis': ['Aide alimentaire et matérielle au Burundi', 'Soutenez les distributions de nourriture, vêtements, chaussures et uniformes aux familles et aux enfants avec Direct Aid Burundi.'],
   'actions/sacrifices': ['Sacrifices solidaires au Burundi', 'Organisez un sacrifice à distance et soutenez la distribution de viande aux familles au Burundi.'],
   temoignages: ['Témoignages', 'Retrouvez les témoignages publiés par Direct Aid Burundi.'],
   contact: ['Contacter Direct Aid Burundi', 'Retrouvez les coordonnées de Direct Aid Burundi pour poser vos questions sur les dons et les actions de l’association.'],

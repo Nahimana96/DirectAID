@@ -1,5 +1,6 @@
 "use client";
 import {Trash2} from 'lucide-react';
+import {PhotoOrderEditor} from './photo-order-editor';
 
 import {useRef, useState, type FormEvent} from 'react';
 import {Button} from './ui/button';
@@ -115,7 +116,7 @@ export function AdminEntryForm({draft, campaign, projects, upload, mutate, busy,
     <LocalizedEntryField label={campaign ? 'Présentation de la campagne' : 'Bilan de l’action'} path="description" value={draft.description} multiline errors={errors} onChange={(value, locale) => update({description: value}, `description.${locale}`)}/>
     <div className="two-fields">
       <Field label="Action concernée"><select value={draft.cause} aria-invalid={Boolean(errors.cause)} onChange={event => update({cause: event.target.value as EntryDraft['cause'], projectId: null}, 'cause', 'projectId')}>
-        {([['orphelins', 'Orphelins'], ['puits', 'Puits d’eau'], ['colis', 'Colis alimentaires'], ['sacrifices', 'Sacrifices']] as const).filter(([value]) => value !== 'puits' || !campaign || (draft.id && draft.cause === 'puits')).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+        {([['orphelins', 'Orphelins'], ['puits', 'Puits d’eau'], ['colis', 'Aide alimentaire et matérielle'], ['sacrifices', 'Sacrifices']] as const).filter(([value]) => value !== 'puits' || !campaign || (draft.id && draft.cause === 'puits')).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
       </select><FieldError message={errors.cause}/></Field>
       <Field label="Lieu / village"><Input value={draft.location} aria-invalid={Boolean(errors.location)} onChange={event => update({location: event.target.value}, 'location')}/><FieldError message={errors.location}/></Field>
     </div>
@@ -135,7 +136,7 @@ export function AdminEntryForm({draft, campaign, projects, upload, mutate, busy,
       </>}
     </> : <Field label="Date de réalisation"><Input type="date" max={today()} value={draft.date} aria-invalid={Boolean(errors.date)} onChange={event => update({date: event.target.value}, 'date')}/><FieldError message={errors.date}/></Field>}
     <Field label="Ajouter une photo (4 Mo max., 12 photos maximum)"><Input disabled={busy || draft.images.length >= 12} type="file" accept="image/jpeg,image/png,image/webp" aria-invalid={Boolean(errors.images)} onChange={async event => {const file = event.target.files?.[0]; if (file) {const asset = await upload(file); if (asset) update({images: [...draft.images, asset.id]}, 'images');} event.target.value = '';}}/><FieldError message={errors.images}/></Field>
-    <div className="editor-photos">{draft.images.map((id, index) => <div key={id}><img src={'/api/media/' + id} alt={'Photo ' + (index + 1)}/><Button type="button" variant="ghost" onClick={() => update({images: draft.images.filter(image => image !== id)}, 'images')}>Retirer</Button></div>)}</div>
+    <PhotoOrderEditor images={draft.images} disabled={busy} onChange={images => update({images}, 'images')}/>
     {draft.images.length > 0 && <label className="check-field entry-check-field" data-invalid={Boolean(errors.imageConsent)}><input type="checkbox" checked={draft.imageConsent} aria-invalid={Boolean(errors.imageConsent)} onChange={event => update({imageConsent: event.target.checked}, 'imageConsent')}/><span>L’association autorise la diffusion publique de ces images.<FieldError message={errors.imageConsent}/></span></label>}
     <label className="check-field"><input type="checkbox" checked={draft.published} onChange={event => update({published: event.target.checked}, 'imageConsent')}/>Publier sur le site</label>
     <p className="fineprint">{campaign ? 'La collecte utilise les paiements confirmés. Une campagne hors période reste consultable sans proposer de nouveau don.' : 'Seuls les contenus publiés apparaissent sur le site.'}</p>

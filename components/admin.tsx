@@ -26,7 +26,7 @@ import { TestimonialModeration } from './testimonial-moderation';
 import { actionPhotos } from './action-carousel';
 import { money,today,type Settings } from '@/lib/domain';
 
-const causeNames:Record<string,string>={orphelins:'Orphelins',puits:'Puits',colis:'Colis',sacrifices:'Sacrifices'};
+const causeNames:Record<string,string>={orphelins:'Orphelins',puits:'Puits',colis:'Aide alimentaire et matérielle',sacrifices:'Sacrifices'};
 const statusNames:Record<string,string>={pending:'En attente',paid:'Payé',cancelled:'Annulé',refunded:'Remboursé',queued:'En attente d’envoi',sending:'En cours',sent:'Envoyé',failed:'Échec',skipped:'Ignoré'};
 const emptyProject={title:'',title_en:'',title_ar:'',location:'',description:'',description_en:'',description_ar:'',goal:200000,stage:'planned',published:false,show_in_campaigns:false,cover:null,updates:[]};
 export default function Admin(){const [data,setData]=useState<any>(null),[error,setError]=useState(''),[tab,setTab]=useState('tasks'),[menuOpen,setMenuOpen]=useState(false),[statsOpen,setStatsOpen]=useState(false),[filter,setFilter]=useState('all'),[search,setSearch]=useState(''),[selected,setSelected]=useState<string|null>(null),[proofs,setProofs]=useState<any[]>([]),[proofMessage,setProofMessage]=useState(''),[project,setProject]=useState<any>(null),[draft,setDraft]=useState<Settings|null>(null),[busy,setBusy]=useState(false),[confirm,setConfirm]=useState<{title:string;text:string;payload:any}|null>(null),[schedule,setSchedule]=useState('');

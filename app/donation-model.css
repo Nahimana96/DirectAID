@@ -1,0 +1,64 @@
+/* Shared donation form: the reference layout in Direct Aid's colours. */
+.public-shell .donation-wizard{border:1px solid #dce4dc;border-radius:20px;box-shadow:none}
+.public-shell .donation-wizard .form-heading{padding:20px 28px 16px}
+.public-shell .donation-wizard .form-heading h2{font-size:1.15rem;font-weight:650;letter-spacing:-.02em}
+.public-shell .donation-wizard .donation-stepper{background:#fff;padding:16px 28px;border-bottom:1px solid #e5eae4}
+.public-shell .donation-wizard .wizard-step{padding:8px 28px 24px;gap:20px;scrollbar-width:thin;scrollbar-color:#9db79a transparent}
+.public-shell .donation-wizard .wizard-step>h3{font-size:1.05rem;margin:4px 0 0}
+.public-shell .donation-wizard .donation-frequency{display:flex;align-items:center;flex-direction:column;width:100%;margin:0 auto 8px}
+.public-shell .donation-wizard .donation-frequency .full-tabs{width:auto;max-width:100%;display:inline-flex;gap:0;padding:0;background:#fff;border:1px solid var(--green);border-radius:999px;overflow:hidden}
+.public-shell .donation-wizard .donation-frequency .full-tabs [data-slot=tabs-trigger]{min-width:130px;min-height:42px;height:42px;padding:10px 20px;margin:0;border:0;border-radius:0;background:#fff;color:var(--green);font-size:.8rem;font-weight:650;box-shadow:none;transition:background .22s,color .22s}
+.public-shell .donation-wizard .donation-frequency .full-tabs [data-state=active]{background:var(--green);color:#fff}
+.public-shell .donation-wizard .donation-amount{border:0;padding:0;margin:6px 0 0;min-width:0;display:flex;flex-direction:column;gap:24px}
+.public-shell .donation-wizard .donation-amount legend{width:100%;text-align:center;text-transform:uppercase;font-family:'Segoe UI',Arial,sans-serif;font-size:.79rem;letter-spacing:.04em;font-weight:700;margin-bottom:22px;color:var(--green)}
+.public-shell .donation-wizard .donation-amount .amount-options{display:flex;justify-content:space-evenly;align-items:center;gap:12px;flex-wrap:wrap;width:100%}
+.public-shell .donation-wizard .amount-options>button{flex:none;display:grid;place-items:center;min-width:56px;width:56px;min-height:56px;height:56px;padding:4px;border-radius:50%;background:white;border:1px solid var(--green);color:var(--green);box-shadow:none;font-size:.8rem;font-weight:650;line-height:1.1;transition:background .22s,color .22s,transform .22s}
+.public-shell .donation-wizard .amount-options>button:hover{background:#eef4eb;transform:translateY(-2px)}
+.public-shell .donation-wizard .amount-options>button[aria-pressed=true]{background:var(--green);color:var(--yellow);border-color:var(--green)}
+.public-shell .donation-wizard .amount-options>button:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.public-shell .donation-wizard .donation-custom-amount{width:100%;margin:0}
+.public-shell .donation-wizard .donation-custom-amount input{border-radius:999px;height:48px;min-height:48px;padding:10px 20px;text-align:center;border:1px solid #b9c6bc;background:#fff;font-size:.9rem;font-weight:500;appearance:textfield}
+.donation-custom-amount input::-webkit-inner-spin-button,.donation-custom-amount input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.public-shell .donation-wizard .donation-custom-amount input:focus-visible{border-color:var(--green);box-shadow:0 0 0 3px #104f3818;outline:none}
+.public-shell .donation-wizard .choice-grid,.public-shell .donation-wizard .offer-list{gap:12px}
+.public-shell .donation-wizard .choice{background:#fff;border:1px solid #d4dfd4;border-radius:12px;padding:13px 14px;min-height:48px;font-size:.82rem;transition:background .2s,border-color .2s}
+.public-shell .donation-wizard .choice:has([data-state=checked]){background:#f1f6ee;border-color:var(--green)}
+.public-shell .donation-wizard .choice strong{font-size:.8rem}
+.public-shell .donation-wizard .field{gap:7px}
+.public-shell .donation-wizard .field>span{font-size:.78rem;font-weight:550}
+.public-shell .donation-wizard input,.public-shell .donation-wizard [data-slot=select-trigger]{background:#fff;border-color:#cbd6cc;border-radius:10px;min-height:44px;height:44px}
+.public-shell .donation-wizard textarea{background:#fff;border-color:#cbd6cc;border-radius:10px}
+.public-shell .donation-wizard .wizard-footer{background:#fff;border-top:1px solid #e0e6df;padding:16px 28px}
+.public-shell .donation-wizard .total-row{padding-bottom:12px;font-size:.85rem}
+.public-shell .donation-wizard .total-row strong{font-size:1.35rem}
+.public-shell .donation-wizard .wizard-buttons{justify-content:space-between;gap:12px}
+.public-shell .donation-wizard .wizard-buttons .button,.public-shell .donation-wizard .wizard-buttons>button{border-radius:8px;flex:0 1 auto;width:auto;min-width:130px;min-height:44px;padding:10px 24px}
+.public-shell .donation-wizard .wizard-buttons>button:only-child{margin-inline-start:auto}
+.public-shell .donation-wizard .donation-method .full-tabs{border:1px solid #d5dfd3;background:white;padding:4px;gap:4px;border-radius:10px}
+.public-shell .donation-wizard .donation-method .full-tabs [data-slot=tabs-trigger]{border-radius:7px}
+.aid-procedure .qurban-slide-0 img{object-position:62% center}
+.aid-procedure .qurban-slide-1 img{object-position:50% center}
+.aid-procedure .qurban-slide-2 img{object-position:47% center}
+.aid-procedure .qurban-caption{min-height:205px}
+@media(max-width:900px){.aid-procedure .qurban-caption{min-height:170px}}
+@media(max-width:760px){
+ .public-shell:has(.donation-wizard)>main{height:auto;overflow:visible}
+ .public-shell main>.section:has(.donation-wizard){height:auto;overflow:visible;min-height:calc(100dvh - var(--header-height))}
+ .public-shell .donation-layout .donation-wizard{height:auto;min-height:620px;max-height:none}
+ .public-shell .donation-wizard .wizard-body{overflow:visible;flex:1 0 auto}
+ .public-shell .donation-wizard .wizard-step{overflow:visible;flex:1 0 auto;min-height:300px}
+}
+@media(max-width:600px){
+ .public-shell .donation-wizard .donation-stepper{padding:14px 18px}
+ .public-shell .donation-wizard .wizard-step{padding:12px 18px 20px;gap:18px}
+ .public-shell .donation-wizard .form-heading{display:block;padding:16px 18px 12px}
+ .public-shell .donation-wizard .form-heading h2{font-size:1.05rem}
+ .public-shell .donation-wizard .wizard-footer{padding:14px 18px max(14px,env(safe-area-inset-bottom))}
+ .public-shell .donation-wizard .amount-options>button{width:50px;min-width:50px;height:50px;min-height:50px;font-size:.75rem}
+ .public-shell .donation-wizard .donation-frequency .full-tabs [data-slot=tabs-trigger]{min-width:112px;padding:10px 15px}
+ .public-shell .donation-wizard .wizard-buttons .button,.public-shell .donation-wizard .wizard-buttons>button{padding:10px 16px;min-width:100px}
+ .public-shell .donation-wizard .choice{padding:11px 10px;font-size:.76rem;flex-wrap:wrap;gap:8px}
+ .aid-procedure .qurban-caption{min-height:190px}
+}
+@media(max-height:650px) and (min-width:901px){.public-shell .donation-wizard .form-heading{padding:10px 20px}.public-shell .donation-wizard .donation-stepper{padding:10px 20px}.public-shell .donation-wizard .wizard-step{padding:8px 20px;gap:12px}.public-shell .donation-wizard .wizard-footer{padding:10px 20px}.public-shell .donation-wizard .donation-amount{gap:16px}.public-shell .donation-wizard .donation-amount legend{margin-bottom:16px}}
+@media(prefers-reduced-motion:reduce){.public-shell .donation-wizard .amount-options>button,.public-shell .donation-wizard .choice,.public-shell .donation-wizard .donation-frequency .full-tabs [data-slot=tabs-trigger]{transition:none}.public-shell .donation-wizard .amount-options>button:hover{transform:none}}

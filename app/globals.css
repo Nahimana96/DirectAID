@@ -76,10 +76,10 @@
 .testimonial-card figcaption span{font-weight:600}
 .testimonial-card figcaption small{font-size:.85rem;color:#788270}
 .testimonial-carousel{max-width:940px;margin:0 auto}
-.testimonial-carousel-viewport{overflow:hidden;border-radius:22px}
+.testimonial-carousel-viewport{overflow:hidden;border-radius:64px}
 .testimonial-carousel-track{display:flex;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
 .testimonial-slide{flex:0 0 100%;min-width:0}
-.testimonial-carousel .testimonial-card{min-height:270px;height:100%;padding:clamp(26px,5vw,48px);border-radius:22px;gap:22px;box-shadow:0 16px 42px #123e2b0d}
+.testimonial-carousel .testimonial-card{min-height:270px;height:100%;padding:clamp(26px,5vw,48px);border-radius:64px;gap:22px;box-shadow:0 16px 42px #123e2b0d}
 .testimonial-carousel .testimonial-card blockquote{font-size:clamp(1.22rem,2.35vw,1.75rem);line-height:1.55}
 .testimonial-carousel .testimonial-card>svg{color:#b89942}
 .testimonial-carousel .testimonial-card h3{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.2;color:var(--green);margin:0}
@@ -92,7 +92,7 @@
 .testimonial-carousel-arrows button{width:42px;height:42px;border:1px solid #c8d6c6;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--green);cursor:pointer;transition:background .2s,color .2s,transform .2s}
 .testimonial-carousel-arrows button:hover{background:var(--green);color:#fff;transform:translateY(-2px)}
 .testimonial-carousel button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
-@media(max-width:700px){.testimonial-carousel .testimonial-card{min-height:310px;padding:28px}.testimonial-carousel .testimonial-card blockquote{font-size:1.2rem}.testimonial-carousel-controls{margin-top:12px}}
+@media(max-width:700px){.testimonial-carousel-viewport{border-radius:40px}.testimonial-carousel .testimonial-card{min-height:310px;padding:28px;border-radius:40px}.testimonial-carousel .testimonial-card blockquote{font-size:1.2rem}.testimonial-carousel-controls{margin-top:12px}}
 @media(prefers-reduced-motion:reduce){.testimonial-carousel-track,.testimonial-carousel-dots button::after,.testimonial-carousel-arrows button{transition:none}}
 .testimonials-empty{border:1px solid #dddcc9;border-radius:18px;padding:40px;display:flex;align-items:center;gap:24px;color:#64745f;background:#ffffff88}
 .testimonials-empty svg{color:#b89942;flex-shrink:0}

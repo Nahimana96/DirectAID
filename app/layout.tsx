@@ -7,10 +7,15 @@ import "./card-loading.css";
 import "./donation-wizard.css";
 import "./water-action.css";
 import "./modern-ui.css";
+import "./qurban.css";
+import "./admin-editorial.css";
+import "./donation-model.css";
+import "./rounded-controls.css";
+import "./action-cards.css";
 
 export const metadata: Metadata = {
   title: "Direct Aid Burundi — Ensemble, agir au plus près",
-  description: "Soutenez les actions de Direct Aid Burundi : orphelins, puits d’eau, colis alimentaires et sacrifices à distance.",
+  description: "Soutenez les actions de Direct Aid Burundi : orphelins, puits d’eau, aide alimentaire et matérielle, et Qurban à distance.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
